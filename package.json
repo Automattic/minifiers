@@ -1,0 +1,14 @@
+{
+	"name": "minifiers",
+	"version": "4.0.0",
+	"description": "HTTP minification proxy for HTML, CSS, JS, and SVG.",
+	"main": "server.js",
+	"dependencies": {
+		"csso": "3.5.0",
+		"got": "9.3.1",
+		"node-getopt": "0.3.2",
+		"svgo": "1.1.1",
+		"terser": "3.10.11",
+		"html-minifier": "3.5.20"
+	}
+}
