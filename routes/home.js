@@ -19,7 +19,7 @@ module.exports = ( request, response, url_parts, process_types ) => {
 	// Go get the original
 	( async () => {
 		try {
-			const got_response = await got( origin_url );
+			const got_response = await got( origin_url, { encoding: null } );
 			const content_type = got_response.headers['content-type'].toLowerCase();
 			response.writeHead( 200, { 'Content-Type': content_type } );
 
