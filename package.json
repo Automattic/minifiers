@@ -9,6 +9,6 @@
 		"node-getopt": "0.3.2",
 		"svgo": "1.1.1",
 		"terser": "3.10.11",
-		"html-minifier": "3.5.20"
+		"html-minifier": "3.5.21"
 	}
 }
