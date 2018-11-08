@@ -14,4 +14,6 @@ Options:
 
 # Examples
 
+`
 http://localhost:4000/?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
+`
