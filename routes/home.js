@@ -31,8 +31,10 @@ module.exports = ( request, response, url_parts, process_types ) => {
 				let type_check = process_types[t];
 
 				if ( type_check.regex.test( content_type ) ) {
+					let content = got_response.body.toString();
+
 					minify_start = performance.now();
-					let result = type_check.min_func( got_response.body );
+					let result = type_check.min_func( content );
 
 					// svgo is serious about being async, so play nice
 					// with getting a promise back instead of our
@@ -45,7 +47,7 @@ module.exports = ( request, response, url_parts, process_types ) => {
 								origin_url,
 								t,
 								got_response.timings.phases,
-								got_response.body.length,
+								content.length,
 								promise_data.length,
 								minify_stop - minify_start
 							);
@@ -61,7 +63,7 @@ module.exports = ( request, response, url_parts, process_types ) => {
 							origin_url,
 							t,
 							got_response.timings.phases,
-							got_response.body.length,
+							content.length,
 							result.length,
 							minify_stop - minify_start
 						);
@@ -72,6 +74,7 @@ module.exports = ( request, response, url_parts, process_types ) => {
 				}
 			}
 
+			// If we are still here, give it back unchanged
 			response.end( got_response.body );
 		} catch ( e ) {
 			log( { 'error': 'Error getting origin URL: ' + origin_url } );
