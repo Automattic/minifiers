@@ -2,6 +2,7 @@
 
 ## unreleased
 - Add a JPG pass through test
+- Log pass through requests
 
 ## 4.1.0 : 2018-11-07
 - Fix passing through binary items that are not minified

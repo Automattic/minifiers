@@ -75,6 +75,14 @@ module.exports = ( request, response, url_parts, process_types ) => {
 			}
 
 			// If we are still here, give it back unchanged
+			origin_log(
+				origin_url,
+				'pass-through',
+				got_response.timings.phases,
+				got_response.body.length,
+				got_response.body.length,	// there is no minified version
+				0					// no minification is infinitely fast
+			);
 			response.end( got_response.body );
 		} catch ( e ) {
 			log( { 'error': 'Error getting origin URL: ' + origin_url } );
