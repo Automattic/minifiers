@@ -1,5 +1,5 @@
 # minifiers
-HTTP minification server
+HTTP minification server, for CSS, HTML, JavaScript, and SVG.
 
 # Usage
 ```
@@ -11,3 +11,7 @@ Options:
   -v, --version   Show the version.
   -h, --help      display this help
 ```
+
+# Examples
+
+http://localhost:4000/?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
