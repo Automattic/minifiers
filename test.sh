@@ -44,3 +44,14 @@ if [ "$SVG_MD5" = "$SVG_TEST_MD5" ]; then
 else
 	echo "SVG: FAILED"
 fi
+
+# Pass Through
+# JPG
+PT_JPG_MD5="0ed0040986945fa462e92e34bb1998b3"
+PT_JPG_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://upload.wikimedia.org/wikipedia/en/5/58/Penny_test.jpg' | $MD5)"
+
+if [ "$PT_JPG_MD5" = "$PT_JPG_TEST_MD5" ]; then
+	echo "Pass Through, JPG: Passed"
+else
+	echo "Pass Through, JPG: FAILED"
+fi
