@@ -117,7 +117,9 @@ Returns an event emitter.
 
 Type: `object`, `string`
 
-Any of the default request functions options plus:
+- Any of the default request functions options.
+- Any [`http-cache-semantics`](https://github.com/kornelski/http-cache-semantics#constructor-options) options.
+- Any of the following:
 
 ###### opts.cache
 

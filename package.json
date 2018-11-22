@@ -5,10 +5,10 @@
 	"main": "server.js",
 	"dependencies": {
 		"csso": "3.5.0",
-		"got": "9.3.1",
+		"got": "9.3.2",
 		"node-getopt": "0.3.2",
 		"svgo": "1.1.1",
-		"terser": "3.10.11",
+		"terser": "3.10.12",
 		"html-minifier": "3.5.21"
 	}
 }
