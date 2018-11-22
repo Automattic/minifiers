@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 4.1.1 : 2018-11-21
 - Add a JPG pass through test
 - Log pass through requests
 - Update 'got' module to 9.3.2
