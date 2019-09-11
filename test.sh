@@ -47,8 +47,8 @@ fi
 
 # Pass Through
 # JPG
-PT_JPG_MD5="0ed0040986945fa462e92e34bb1998b3"
-PT_JPG_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://upload.wikimedia.org/wikipedia/en/5/58/Penny_test.jpg' | $MD5)"
+PT_JPG_MD5="809fd2c9401a2abf4e6fe220df8205af"
+PT_JPG_TEST_MD5="$(curl -s 'http://localhost:4000/?url=http://imagecompression.info/test_images/big_thumbnails/big_building.jpg' | $MD5)"
 
 if [ "$PT_JPG_MD5" = "$PT_JPG_TEST_MD5" ]; then
 	echo "Pass Through, JPG: Passed"
