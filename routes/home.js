@@ -31,7 +31,10 @@ module.exports = ( request, response, url_parts, process_types ) => {
 				let type_check = process_types[t];
 
 				if ( type_check.regex.test( content_type ) ) {
-					let content = got_response.body.toString();
+					let content = got_response.body;
+					if ( type_check.type === 'string' ) {
+						content = content.toString();
+					}
 
 					minify_start = performance.now();
 					let result = type_check.min_func( content );

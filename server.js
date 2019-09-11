@@ -11,19 +11,28 @@ const routes = {
 const process_types = {
 	'css': {
 		regex: new RegExp( /^text\/css/ ),
-		min_func: require( './lib/css-min.js' )
+		min_func: require( './lib/css-min.js' ),
+		type: 'string'
 	},
 	'html': { 
 		regex: new RegExp( /^text\/html/ ),
-		min_func: require( './lib/html-min.js' )
+		min_func: require( './lib/html-min.js' ),
+		type: 'string'
 	},
 	'js': {
 		regex: new RegExp( /^(application\/javascript)|(application\/x-javascript)|(application\/ecmascript)|(text\/javascript)|(text\/ecmascript)/ ),
-		min_func: require( './lib/js-min.js' )
+		min_func: require( './lib/js-min.js' ),
+		type: 'string'
+	},
+	'png': {
+		regex: new RegExp( /^image\/png/ ),
+		min_func: require( './lib/png-min.js' ),
+		type: 'binary'
 	},
 	'svg': {
 		regex: new RegExp( /^image\/svg\+xml/ ),
-		min_func: require( './lib/svg-min.js' )
+		min_func: require( './lib/svg-min.js' ),
+		type: 'string'
 	}
 };
 
