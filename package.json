@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"dependencies": {
 		"csso": "3.5.0",
-		"got": "9.3.2",
+		"got": "9.6.0",
 		"node-getopt": "0.3.2",
 		"svgo": "1.1.1",
 		"terser": "3.10.12",
