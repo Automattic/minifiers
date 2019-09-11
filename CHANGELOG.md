@@ -2,6 +2,7 @@
 
 ## unreleased
 - New passthough jpg URL to test against
+- Internal type parameter, string/binary
 
 ## 4.1.1 : 2018-11-21
 - Add a JPG pass through test
