@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 4.2.0 : 2019-09-11
 - New passthough jpg URL to test against
 - Internal type parameter, string/binary
 - Update 'got' module to 9.6.0
