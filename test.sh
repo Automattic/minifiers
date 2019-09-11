@@ -36,7 +36,7 @@ else
 fi
 
 # SVG
-SVG_MD5="b90876922b20c6f46af491bbd18877d7"
+SVG_MD5="02b6ff0f9ea2d7005d66c3c40e06d71d"
 SVG_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/svg2009.svg' | $MD5)"
 
 if [ "$SVG_MD5" = "$SVG_TEST_MD5" ]; then
