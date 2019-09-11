@@ -6,6 +6,7 @@
 - Update 'got' module to 9.6.0
 - Update 'svgo' module to 1.3.0
 - Update 'html-minifier' module to 4.0.0
+- Update 'terser' module to 4.3.1
 
 ## 4.1.1 : 2018-11-21
 - Add a JPG pass through test
