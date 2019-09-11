@@ -1,5 +1,8 @@
 # Changelog
 
+## unreleased
+- New passthough jpg URL to test against
+
 ## 4.1.1 : 2018-11-21
 - Add a JPG pass through test
 - Log pass through requests
