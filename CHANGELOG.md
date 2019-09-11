@@ -3,6 +3,8 @@
 ## unreleased
 - New passthough jpg URL to test against
 - Internal type parameter, string/binary
+- Update 'got' module to 9.6.0
+- Update 'svgo' module to 1.3.0
 
 ## 4.1.1 : 2018-11-21
 - Add a JPG pass through test
