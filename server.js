@@ -24,11 +24,6 @@ const process_types = {
 		min_func: require( './lib/js-min.js' ),
 		type: 'string'
 	},
-	'png': {
-		regex: new RegExp( /^image\/png/ ),
-		min_func: require( './lib/png-min.js' ),
-		type: 'binary'
-	},
 	'svg': {
 		regex: new RegExp( /^image\/svg\+xml/ ),
 		min_func: require( './lib/svg-min.js' ),
