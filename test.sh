@@ -26,7 +26,7 @@ else
 fi
 
 # JS
-JS_MD5="f4914d3c444df19755fa37e2ec788f83"
+JS_MD5="594c1e9b65695c0bf776ecf90331b132"
 JS_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js' | $MD5)"
 
 if [ "$JS_MD5" = "$JS_TEST_MD5" ]; then
