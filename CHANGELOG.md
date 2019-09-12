@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.1 : 2019-09-12
+- Fix JavaScript test
+- Sync up with the module updates
+
 ## 4.2.0 : 2019-09-11
 - New passthough jpg URL to test against
 - Internal type parameter, string/binary
