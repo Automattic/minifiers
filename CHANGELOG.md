@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.2 : 2019-09-12
+- Remove unused code
+
 ## 4.2.1 : 2019-09-12
 - Fix JavaScript test
 - Sync up with the module updates
