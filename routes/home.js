@@ -57,6 +57,7 @@ module.exports = ( request, response, url_parts, process_types ) => {
 							);
 
 							result = compress(
+								response,
 								result,
 								request.headers['accept-encoding']
 							);
@@ -77,6 +78,7 @@ module.exports = ( request, response, url_parts, process_types ) => {
 						);
 
 						result = compress(
+							response,
 							result,
 							request.headers['accept-encoding']
 						);
