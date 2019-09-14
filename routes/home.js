@@ -2,6 +2,7 @@ module.exports = ( request, response, url_parts, process_types ) => {
 	const got = require( 'got' );
 	const { PerformanceObserver, performance } = require( 'perf_hooks' );
 	const log = require( '../lib/log.js' );
+	const compress = require( '../lib/compress.js' );
 	const origin_log = require( '../lib/origin-log.js' );
 
 	// We need a valid looking URL to go get
