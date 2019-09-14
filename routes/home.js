@@ -56,6 +56,10 @@ module.exports = ( request, response, url_parts, process_types ) => {
 								minify_stop - minify_start
 							);
 
+							result = compress(
+								result,
+								request.headers['accept-encoding']
+							);
 							response.end( promise_data );
 						} );
 
@@ -72,6 +76,10 @@ module.exports = ( request, response, url_parts, process_types ) => {
 							minify_stop - minify_start
 						);
 
+						result = compress(
+							result,
+							request.headers['accept-encoding']
+						);
 						response.end( result );
 						return;
 					}
