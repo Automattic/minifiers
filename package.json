@@ -3,6 +3,9 @@
 	"version": "4.1.0",
 	"description": "HTTP minification proxy for HTML, CSS, JS, and SVG.",
 	"main": "server.js",
+	"engines": {
+		"node": ">=12.10.0"
+	},
 	"dependencies": {
 		"csso": "3.5.0",
 		"got": "9.6.0",
