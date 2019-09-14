@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.0 : 2019-09-14
+- Support brotli, gzip, and deflate compression after minification
+
 ## 4.2.2 : 2019-09-12
 - Remove unused code
 
