@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.1 : 2019-09-16
+- Unbreak requests with no compression support
+
 ## 4.3.0 : 2019-09-14
 - Support brotli, gzip, and deflate compression after minification
 
