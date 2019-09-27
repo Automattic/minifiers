@@ -4,6 +4,7 @@
 - Simplify the code around promises
 - Really fix compression / no compression this time
 - New tests for HTTP compression of minified results
+- Provide a way to ask for br or gzip compression as a URL parameter, along with the compression level
 
 ## 4.3.1 : 2019-09-16
 - Unbreak requests with no compression support
