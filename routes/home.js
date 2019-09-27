@@ -17,6 +17,22 @@ module.exports = ( request, response, url_parts, process_types ) => {
 
 	origin_url = new URL( origin_url ).href;
 
+	// Look for compression options in the URL
+	let compression_type = request.headers['accept-encoding'];
+	let compression_level = 1;
+
+	let compress_opt = url_parts.searchParams.get( 'http-compression' );
+	if ( url_parts.searchParams.has( 'http-compression' ) ) {
+		let compression = compress_opt.match(/^(br|gzip)-?(\d)?$/);
+		if ( compression !== null ) {
+			compression_type = compression[1];
+
+			if ( typeof compression[2] === 'string' ) {
+				compression_level = parseInt( compression[2] );
+			}
+		}
+	}
+
 	// Go get the original
 	( async () => {
 		try {
@@ -54,8 +70,10 @@ module.exports = ( request, response, url_parts, process_types ) => {
 					result = compress(
 						response,
 						result,
-						request.headers['accept-encoding']
+						compression_type,
+						compression_level
 					);
+
 					response.end( result );
 					return;
 				}
