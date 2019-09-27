@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.0.1 : 2019-09-27
+- Missed the commit order for 5.0.0
+
 ## 5.0.0 : 2019-09-27
 - Simplify the code around promises
 - Really fix compression / no compression this time

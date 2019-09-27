@@ -1,5 +1,5 @@
 // Global vars
-const version = '5.0.0';
+const version = '5.0.1';
 
 // URL routes
 const routes = {
