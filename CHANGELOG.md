@@ -2,6 +2,7 @@
 
 ## ???
 - Simplify the code around promises
+- Really fix compression / no compression this time
 
 ## 4.3.1 : 2019-09-16
 - Unbreak requests with no compression support
