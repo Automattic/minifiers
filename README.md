@@ -17,3 +17,11 @@ Options:
 `
 http://localhost:4000/?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
 `
+
+`
+http://localhost:4000/?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css&http-compression=gzip-9
+`
+
+`
+http://localhost:4000/?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css&http-compression=br-11
+`
