@@ -38,53 +38,26 @@ module.exports = ( request, response, url_parts, process_types ) => {
 					}
 
 					minify_start = performance.now();
-					let result = type_check.min_func( content );
+					let result = await type_check.min_func( content );
 
-					// svgo is serious about being async, so play nice
-					// with getting a promise back instead of our
-					// minified string
-					if ( result instanceof Promise ) {
-						result.then( ( promise_data ) => {
-							minify_stop = performance.now();
+					minify_stop = performance.now();
 
-							origin_log(
-								origin_url,
-								t,
-								got_response.timings.phases,
-								content.length,
-								promise_data.length,
-								minify_stop - minify_start
-							);
+					origin_log(
+						origin_url,
+						t,
+						got_response.timings.phases,
+						content.length,
+						result.length,
+						minify_stop - minify_start
+					);
 
-							result = compress(
-								response,
-								result,
-								request.headers['accept-encoding']
-							);
-							response.end( promise_data );
-						} );
-
-						return;
-					} else {
-						minify_stop = performance.now();
-
-						origin_log(
-							origin_url,
-							t,
-							got_response.timings.phases,
-							content.length,
-							result.length,
-							minify_stop - minify_start
-						);
-
-						result = compress(
-							response,
-							result,
-							request.headers['accept-encoding']
-						);
-						response.end( result );
-						return;
-					}
+					result = compress(
+						response,
+						result,
+						request.headers['accept-encoding']
+					);
+					response.end( result );
+					return;
 				}
 			}
 
