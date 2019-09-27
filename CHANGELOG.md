@@ -1,5 +1,8 @@
 # Changelog
 
+## ???
+- Simplify the code around promises
+
 ## 4.3.1 : 2019-09-16
 - Unbreak requests with no compression support
 
