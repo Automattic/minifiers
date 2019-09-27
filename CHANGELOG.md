@@ -1,6 +1,6 @@
 # Changelog
 
-## ???
+## 5.0.0 : 2019-09-27
 - Simplify the code around promises
 - Really fix compression / no compression this time
 - New tests for HTTP compression of minified results
