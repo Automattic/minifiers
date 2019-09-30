@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.1.0 : 2019-09-30
+- New http-compression option, none
+
 ## 5.0.1 : 2019-09-27
 - Missed the commit order for 5.0.0
 
