@@ -23,12 +23,16 @@ module.exports = ( request, response, url_parts, process_types ) => {
 
 	let compress_opt = url_parts.searchParams.get( 'http-compression' );
 	if ( url_parts.searchParams.has( 'http-compression' ) ) {
-		let compression = compress_opt.match(/^(br|gzip)-?(\d)?$/);
+		let compression = compress_opt.match(/^(br|gzip|none)-?(\d)?$/);
 		if ( compression !== null ) {
-			compression_type = compression[1];
+			if ( compression[1] === 'none' ) {
+				compression_type = '';
+			} else {
+				compression_type = compression[1];
 
-			if ( typeof compression[2] === 'string' ) {
-				compression_level = parseInt( compression[2] );
+				if ( typeof compression[2] === 'string' ) {
+					compression_level = parseInt( compression[2] );
+				}
 			}
 		}
 	}
