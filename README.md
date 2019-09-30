@@ -1,5 +1,5 @@
 # minifiers
-HTTP minification server, for CSS, HTML, JavaScript, and SVG.
+HTTP minification server for CSS, HTML, JavaScript, and SVG.
 
 # Usage
 ```
