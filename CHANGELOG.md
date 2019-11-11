@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.0.0 : ????
+- Update csso to 4.0.2
+
 ## 5.1.0 : 2019-09-30
 - New http-compression option, none
 
