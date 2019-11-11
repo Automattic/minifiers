@@ -6,7 +6,7 @@ if [ -e /sbin/md5 ]; then
 fi
 
 # CSS
-CSS_MD5="42da7ab7cfa26de33b97038742d42a9b"
+CSS_MD5="34dd241ea842656245ff0a3d965cbf39"
 CSS_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css' | $MD5)"
 
 if [ "$CSS_MD5" = "$CSS_TEST_MD5" ]; then
@@ -25,7 +25,7 @@ else
 fi
 
 # HTML
-HTML_MD5="d3c127c4d9e792aa498f9f57620cd230"
+HTML_MD5="4606198307c9a55290d953ad06585ef1"
 HTML_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://wordpress.com/wp-content/themes/pub/vermilion-christmas/README.html' | $MD5)"
 
 if [ "$HTML_MD5" = "$HTML_TEST_MD5" ]; then
