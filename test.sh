@@ -44,7 +44,7 @@ else
 fi
 
 # JS
-JS_MD5="594c1e9b65695c0bf776ecf90331b132"
+JS_MD5="dd7a2e99043182abde87300564728cc2"
 JS_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js' | $MD5)"
 
 if [ "$JS_MD5" = "$JS_TEST_MD5" ]; then
