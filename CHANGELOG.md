@@ -2,6 +2,7 @@
 
 ## 6.0.0 : ????
 - Update csso to 4.0.2
+- Update svgo to 1.3.2
 
 ## 5.1.0 : 2019-09-30
 - New http-compression option, none
