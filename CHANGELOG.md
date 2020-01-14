@@ -1,5 +1,8 @@
 # Changelog
 
+## ???
+- Update terser to 4.6.3
+
 ## 6.0.0 : 14 Nov 2019
 - Update csso to 4.0.2
 - Update svgo to 1.3.2
