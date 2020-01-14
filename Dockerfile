@@ -1,4 +1,4 @@
-FROM node:12.14.0-buster
+FROM node:12.14.0-slim
 
 WORKDIR /box/minifiers
 COPY . .
