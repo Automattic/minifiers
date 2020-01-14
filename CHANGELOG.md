@@ -1,7 +1,8 @@
 # Changelog
 
-## ???
+## 6.1.0 : ???
 - Update terser to 4.6.3
+- Bump version to 6.1.0
 
 ## 6.0.0 : 14 Nov 2019
 - Update csso to 4.0.2
