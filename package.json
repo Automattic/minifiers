@@ -4,7 +4,7 @@
 	"description": "HTTP minification proxy for HTML, CSS, JS, and SVG.",
 	"main": "server.js",
 	"engines": {
-		"node": ">=12.10.0"
+		"node": ">=12.14.0"
 	},
 	"dependencies": {
 		"csso": "4.0.2",
