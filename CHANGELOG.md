@@ -1,6 +1,6 @@
 # Changelog
 
-## 6.1.0 : ???
+## 6.1.0 : 14 Jan 2020
 - Update terser to 4.6.3
 - Bump version to 6.1.0
 - Require 12.14.0 or higher
