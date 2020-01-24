@@ -1,6 +1,3 @@
-// Global vars
-const version = '6.1.0';
-
 // URL routes
 const routes = {
 	'/': require( './routes/home.js' ),
@@ -40,6 +37,7 @@ const opt = require( 'node-getopt' ).create( [
 .parseSystem();
 
 if ( opt.options.version ) {
+	const version = require('./package.json').version;
 	console.log( version );
 	process.exit( 0 );
 }
