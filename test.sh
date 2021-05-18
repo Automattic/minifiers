@@ -6,7 +6,7 @@ if [ -e /sbin/md5 ]; then
 fi
 
 # CSS
-CSS_MD5="34dd241ea842656245ff0a3d965cbf39"
+CSS_MD5="869fe66f14ab997d1ad337eabafce33d"
 CSS_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css' | $MD5)"
 
 if [ "$CSS_MD5" = "$CSS_TEST_MD5" ]; then
@@ -44,7 +44,7 @@ else
 fi
 
 # JS
-JS_MD5="dd7a2e99043182abde87300564728cc2"
+JS_MD5="c01b4f65e80cbde631c6eb86d9002dd6"
 JS_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js' | $MD5)"
 
 if [ "$JS_MD5" = "$JS_TEST_MD5" ]; then
@@ -63,7 +63,7 @@ else
 fi
 
 # SVG
-SVG_MD5="3c6f0b9920a98c2cf05c8ae4bb29c073"
+SVG_MD5="9ddcc372e5b3d43973213ae8ef7fcbb8"
 SVG_TEST_MD5="$(curl -s 'http://localhost:4000/?url=https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/svg2009.svg' | $MD5)"
 
 if [ "$SVG_MD5" = "$SVG_TEST_MD5" ]; then
