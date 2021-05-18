@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.0.0 : 18 May 2021
+- Update 'csso' to 4.2.0
+- Update 'got' to 11.8.2
+- Update 'svgo' to 2.3.0
+- Update 'terser' to 5.7.0
+
 ## 6.1.0 : 14 Jan 2020
 - Update terser to 4.6.3
 - Bump version to 6.1.0
