@@ -4,6 +4,7 @@ HTTP minification server for CSS, HTML, JavaScript, and SVG.
 # Usage
 ```
 Usage:
+  npm install
   node server.js [OPTION]
 
 Options:
