@@ -20,7 +20,6 @@
 		"supertest": "^6.3.3"
 	},
 	"scripts": {
-		"start": "node server.js > logs/info.log",
 		"test": "node --dns-result-order=ipv4first ./node_modules/jest/bin/jest.js ./tests"
 	}
 }

@@ -18,7 +18,7 @@ server.listen(
 	( err, address ) => {
 		// If this happens something very bad has happened, end of the world.
 		if ( err ) {
-			fastify.log.error( err );
+			server.log.error( err );
 			process.exit( 1 );
 		}
 	}
