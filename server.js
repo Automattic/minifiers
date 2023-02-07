@@ -1,66 +1,24 @@
-// URL routes
-const routes = {
-	'/': require( './routes/home.js' ),
-	'/health-check': require( './routes/health-check.js' )
-};
+'use strict';
 
-// Resource types that we process instead of passing through
-const process_types = {
-	'css': {
-		regex: new RegExp( /^text\/css/ ),
-		min_func: require( './lib/css-min.js' ),
-		type: 'string'
+const server = require( 'fastify' )( {
+	logger: true
+} );
+
+// Routes
+server.get( '/', require( './routes/index' ) );
+server.get( '/health-check', require( './routes/health-check' ) );
+server.get( '/get', require( './routes/get' ) );
+
+// Run the server
+server.listen(
+	{
+		port: 4747,
+		host: '0.0.0.0'
 	},
-	'html': { 
-		regex: new RegExp( /^text\/html/ ),
-		min_func: require( './lib/html-min.js' ),
-		type: 'string'
-	},
-	'js': {
-		regex: new RegExp( /^(application\/javascript)|(application\/x-javascript)|(application\/ecmascript)|(text\/javascript)|(text\/ecmascript)/ ),
-		min_func: require( './lib/js-min.js' ),
-		type: 'string'
-	},
-	'svg': {
-		regex: new RegExp( /^image\/svg\+xml/ ),
-		min_func: require( './lib/svg-min.js' ),
-		type: 'string'
+	( err, address ) => {
+		if ( err ) {
+			fastify.log.error( err );
+			process.exit( 1 );
+		}
 	}
-};
-
-// Take care of command line options
-const opt = require( 'node-getopt' ).create( [
-	[ 'p', 'port=4000', 'The TCP port that the web server will listen on.', 4000 ],
-	[ 'v', 'version', 'Show the version.' ]
-] )
-.bindHelp()
-.parseSystem();
-
-if ( opt.options.version ) {
-	const version = require('./package.json').version;
-	console.log( version );
-	process.exit( 0 );
-}
-
-const my_url = 'http://localhost:' + opt.options.port;
-
-// Modules
-const http = require( 'http' );
-const url = require( 'url' );
-const log = require( './lib/log.js' );
-
-// Get ready for work
-log( { msg: 'Started at ' + my_url } );
-http.createServer( ( request, response ) => {
-	const url_parts = new URL( request.url, my_url );
-	const route = routes[url_parts['pathname']];
-
-	if ( route ) {
-		route( request, response, url_parts, process_types );
-	} else {
-		log( { msg: 'No route: ' + url_parts['pathname'] } );
-
-		response.writeHead( 404, { 'Content-Type': 'text/plain' } );
-		response.end( 'No route' );
-	}
-} ).listen( opt.options.port );
+);
