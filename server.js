@@ -9,10 +9,17 @@ server.get( '/', require( './routes/index' ) );
 server.get( '/health-check', require( './routes/health-check' ) );
 server.get( '/get', require( './routes/get' ) );
 
+// Take care of command line options
+const opt = require( 'node-getopt' ).create( [
+    [ 'p', 'port=4747', 'The TCP port that the web server will listen on.', 4747 ],
+] )
+.bindHelp()
+.parseSystem();
+
 // Run the server
 server.listen(
 	{
-		port: 4747,
+		port: opt.options.port,
 		host: '0.0.0.0'
 	},
 	( err, address ) => {
