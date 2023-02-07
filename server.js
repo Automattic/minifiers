@@ -16,6 +16,7 @@ server.listen(
 		host: '0.0.0.0'
 	},
 	( err, address ) => {
+		// If this happens something very bad has happened, end of the world.
 		if ( err ) {
 			fastify.log.error( err );
 			process.exit( 1 );
