@@ -1,17 +1,23 @@
 {
 	"name": "minifiers",
-	"version": "7.0.0",
+	"version": "8.0.0",
 	"description": "HTTP minification proxy for HTML, CSS, JS, and SVG.",
 	"main": "server.js",
 	"engines": {
-		"node": ">=12.14.0"
+		"node": "^18.14.0"
 	},
 	"dependencies": {
 		"csso": "^4.2.0",
+		"fastify": "^4.12.0",
 		"got": "^11.8.2",
 		"html-minifier": "^4.0.0",
+		"jest": "^29.4.2",
 		"node-getopt": "^0.3.2",
+		"supertest": "^6.3.3",
 		"svgo": "^2.3.0",
 		"terser": "^5.7.0"
+	},
+	"scripts": {
+		"test": "jest"
 	}
 }
