@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.0 : ????
+- Moved to Fastify
+
+
 ## 7.0.0 : 18 May 2021
 - Update 'csso' to 4.2.0
 - Update 'got' to 11.8.2
