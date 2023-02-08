@@ -1,39 +1,39 @@
 module.exports = ( request, reply ) => {
 	const superagent = require( 'superagent' );
-
-	let compression_level = 1;
+	const compress = require( '../lib/compress' );
 
 	// Info we have been provided
 	const url = request.query.url;
 
+	let accept = request.headers['accept-encoding'];
+	if ( typeof request.query.with === 'string' ) {
+		accept = request.query.with;
+	}
+
+	let level = 1;
+	if ( typeof request.query.level === 'string' ) {
+		level = parseInt( request.query.level );
+	}
+
 	// Go get the original
 	superagent
 		.get( url )
-		.then( resp => send_reply( reply, resp, compression_level ) )
+		.then( resp => send_reply( reply, resp, accept, level ) )
 		.catch( err => send_error( reply, err ) )
 	;
 
-	function send_reply( reply, resp, compression_level ) {
+	function send_reply( reply, resp, accept, level ) {
+		let encoding = '';
+
 		let body = minify( resp.text, resp.header['content-type'] );
-		body = compress( resp.text, 'gzip', compression_level );
+		[ body, encoding ] = compress( resp.text, accept, level );
 
 		reply
 			.code( 200 )
 			.header( 'Content-Type', resp.headers['content-type'] )
-			.header( 'x-compression-level', compression_level )
+			.header( 'Content-Encoding', encoding )
+			.header( 'x-compression-level', level )
 			.send( body )
-		;
-	}
-
-	function send_error( reply, err ) {
-		reply
-			.code( 500 )
-			.header( 'Content-Type', 'application/json' )
-			.send( {
-				status: 'error',
-				code: 10000,
-				msg: 'Error requesting the original resource'
-			} )
 		;
 	}
 
@@ -41,7 +41,16 @@ module.exports = ( request, reply ) => {
 		return body;
 	}
 
-	function compress( body, compress_as, compression_level ) {
-		return body;
+	function send_error( reply, err ) {
+		reply
+			.code( 500 )
+			.header( 'Content-Type', 'application/json' )
+			.header( 'x-error-code', 10000 )
+			.send( {
+				status: 'error',
+				code: 10000,
+				msg: 'Error requesting the original resource'
+			} )
+		;
 	}
 };
