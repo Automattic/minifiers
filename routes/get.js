@@ -26,8 +26,13 @@ module.exports = ( request, reply ) => {
 	function send_reply( reply, resp, accept, level ) {
 		let encoding = '';
 
-		let body = minify( resp.text, resp.header['content-type'] );
-		[ body, encoding ] = compress( body, accept, level );
+		let [ body, type ] = minify( resp.text, resp.header['content-type'] );
+		// If no type was matched then we are in a pass through condition,
+		// in which case we skip compression and go directly to providing
+		// the original version back.
+		if ( type !== false ) {
+			[ body, encoding ] = compress( body, accept, level );
+		}
 
 		reply
 			.code( 200 )
