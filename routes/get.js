@@ -1,5 +1,6 @@
 module.exports = ( request, reply ) => {
 	const superagent = require( 'superagent' );
+	const minify = require( '../lib/minify' );
 	const compress = require( '../lib/compress' );
 
 	// Info we have been provided
@@ -26,7 +27,7 @@ module.exports = ( request, reply ) => {
 		let encoding = '';
 
 		let body = minify( resp.text, resp.header['content-type'] );
-		[ body, encoding ] = compress( resp.text, accept, level );
+		[ body, encoding ] = compress( body, accept, level );
 
 		reply
 			.code( 200 )
@@ -37,11 +38,8 @@ module.exports = ( request, reply ) => {
 		;
 	}
 
-	function minify( body, type ) {
-		return body;
-	}
-
 	function send_error( reply, err ) {
+		console.log( err );
 		reply
 			.code( 500 )
 			.header( 'Content-Type', 'application/json' )

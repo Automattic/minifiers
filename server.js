@@ -1,7 +1,7 @@
 'use strict';
 
 const server = require( 'fastify' )( {
-	logger: false,
+	logger: true,
 	maxParamLength: 50000 // this defaults to 100, which is way too small
 } );
 
