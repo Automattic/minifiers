@@ -1,7 +1,7 @@
 # Changelog
 
 ## 8.0.0 : ????
-- Moved to Fastify
+- Very large update, most pieces have changed
 
 
 ## 7.0.0 : 18 May 2021
