@@ -1,7 +1,7 @@
 # minifiers
 HTTP minification server for CSS, HTML, JavaScript, and SVG.
 
-# Usage
+## Usage
 ```
 Usage:
   npm install
@@ -12,7 +12,11 @@ Options:
   -h, --help      display this help
 ```
 
-# Examples
+## Tests
+
+With the minifiers server already running, do `npm test`.
+
+## Examples
 
 `
 http://localhost:4747/get?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
