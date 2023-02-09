@@ -8,7 +8,7 @@ Usage:
   node server.js [OPTION]
 
 Options:
-  -p, --port=4000 The TCP port that the web server will listen on. (default: 4000)
+  -p, --port=4747 The TCP port that the web server will listen on. (default: 4747)
   -h, --help      display this help
 ```
 
