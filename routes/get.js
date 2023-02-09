@@ -26,7 +26,9 @@ module.exports = ( request, reply ) => {
 		.then( resp => send_reply( reply, resp, accept, level ) )
 		.catch( err => send_error( reply, err ) )
 	;
-	log.origin_get_ms = parseInt( performance.now() - origin_start );
+	log.origin_get_ms = parseFloat(
+		( performance.now() - origin_start ).toFixed( 3 )
+	);
 
 	function send_reply( reply, resp, accept, level ) {
 		let encoding = '';
@@ -40,7 +42,9 @@ module.exports = ( request, reply ) => {
 
 		const minify_start = performance.now();
 		[ body, type ] = minify( body, resp.header['content-type'] );
-		log.minify_ms = parseInt( performance.now() - minify_start );
+		log.minify_ms = parseFloat(
+			( performance.now() - minify_start ).toFixed( 3 )
+		);
 		log.type = type;
 		log.minify_size = body.length;
 		log.minify_size_diff = log.original_size - log.minify_size;
@@ -54,7 +58,9 @@ module.exports = ( request, reply ) => {
 		if ( type !== false ) {
 			const compress_start = performance.now();
 			[ body, encoding ] = compress( body, accept, level );
-			log.compress_ms = parseInt( performance.now() - compress_start );
+			log.compress_ms = parseFloat(
+				( performance.now() - compress_start ).toFixed( 3 )
+			);
 			log.compress_size = body.length;
 			log.compress_size_diff = log.minify_size - log.compress_size;
 			log.compress_size_diff_percent = parseFloat(
