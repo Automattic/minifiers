@@ -15,6 +15,11 @@ module.exports = () => {
 			min_func: require( './lib/js-min.js' ),
 			type: 'string'
 		},
+		json: {
+			regex: new RegExp( /^(application\/json)/ ),
+			min_func: require( './lib/json-min.js' ),
+			type: 'string'
+		},
 		svg: {
 			regex: new RegExp( /^image\/svg\+xml/ ),
 			min_func: require( './lib/svg-min.js' ),

@@ -32,7 +32,7 @@ test( 'GET `/get` -- JS & br level 11', async () => {
 	;
 } );
 
-test( 'GET `/get` -- HTML & deflate level 8', async () => {
+test( 'GET `/get` -- JS & deflate level 8', async () => {
 	const resp = await supertest( 'http://localhost:4747' )
 		.get( `/get?url=${target_url}&with=deflate&level=8` )
 		.expect( 200 )
