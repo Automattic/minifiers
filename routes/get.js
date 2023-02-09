@@ -29,7 +29,7 @@ module.exports = ( request, reply ) => {
 		let type = false;
 
 		// Some items, like SVG, use body instead
-		body = resp.text || resp.body;
+		body = resp.text || resp.body.toString();
 
 		[ body, type ] = minify( body, resp.header['content-type'] );
 		// If no type was matched then we are in a pass through condition,
