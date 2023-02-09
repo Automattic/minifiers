@@ -18,6 +18,8 @@ With the minifiers server already running, do `npm test`.
 
 ## Examples
 
+The tests/*.js files are good reference for examples.
+
 `
 http://localhost:4747/get?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
 `
