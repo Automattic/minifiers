@@ -1,4 +1,7 @@
-module.exports = ( request, response, url_parts, process_types ) => {
-	response.writeHead( 200, { 'Content-Type': 'text/plain' } );
-	response.end( 'OK' );
+module.exports = ( request, reply ) => {
+	reply
+		.code( 200 )
+		.header( 'Content-Type', 'application/json' )
+		.send( { status: 'OK' } )
+	;
 };
