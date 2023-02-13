@@ -4,6 +4,7 @@
 ## 8.1.0 : ????
 - Removed unused code, lib/origin-log.js
 - This works back to Node 16.19.0
+- Use unreleased fixed version of node-getopt
 
 
 ## 8.0.0 : 10 Feb 2023
