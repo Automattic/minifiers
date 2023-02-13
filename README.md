@@ -33,3 +33,7 @@ http://localhost:4747/get?with=gzip&leve=9&url=https://stackpath.bootstrapcdn.co
 `
 http://localhost:4747/get?with=br&level=11&url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
 `
+
+`
+http://localhost:4747/get?minify=false&url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
+`

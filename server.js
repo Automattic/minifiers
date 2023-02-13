@@ -17,7 +17,7 @@ const opt = require( 'node-getopt' ).create( [
 		'port=4747',
 		'The TCP port that the web server will listen on.',
 		4747
-	],
+	]
 ] )
 .bindHelp()
 .parseSystem();

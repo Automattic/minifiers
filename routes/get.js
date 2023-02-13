@@ -19,6 +19,15 @@ module.exports = ( request, reply ) => {
 		level = parseInt( request.query.level );
 	}
 
+	let do_minify = true;
+	if (
+		typeof request.query.minify === 'string'
+		&& request.query.minify === 'false'
+	) {
+		do_minify = false
+	}
+	log.minify = do_minify;
+
 	// Go get the original
 	const origin_start = performance.now();
 	superagent
@@ -35,6 +44,16 @@ module.exports = ( request, reply ) => {
 
 		// Some items, like SVG, use body instead
 		body = resp.text || resp.body.toString();
+
+		if ( do_minify === false ) {
+			show_log( log );
+			reply
+				.code( 200 )
+				.header( 'Content-Type', resp.headers['content-type'] )
+				.header( 'x-minify', 'f' )
+				.send( body )
+			;
+		}
 
 		log.original_size = body.length;
 
@@ -68,6 +87,7 @@ module.exports = ( request, reply ) => {
 			.header( 'Content-Type', resp.headers['content-type'] )
 			.header( 'Content-Encoding', encoding )
 			.header( 'x-compression-level', level )
+			.header( 'x-minify', 't' )
 			.send( body )
 		;
 	}
