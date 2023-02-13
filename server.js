@@ -31,7 +31,7 @@ server.listen(
 	( err, address ) => {
 		// If this happens something very bad has happened, end of the world.
 		if ( err ) {
-			server.log.error( err );
+			console.log( err );
 			process.exit( 1 );
 		}
 	}

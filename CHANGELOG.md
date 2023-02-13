@@ -5,6 +5,7 @@
 - Removed unused code, lib/origin-log.js
 - This works back to Node 16.19.0
 - Use unreleased fixed version of node-getopt
+- On server start error output error to console
 
 
 ## 8.0.0 : 10 Feb 2023
