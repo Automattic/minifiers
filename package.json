@@ -4,7 +4,7 @@
 	"description": "HTTP minification proxy for HTML, CSS, JS, and SVG.",
 	"main": "server.js",
 	"engines": {
-		"node": "^18.14.0"
+		"node": "^16.19.0"
 	},
 	"dependencies": {
 		"@swc/core": "^1.3.34",
