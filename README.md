@@ -5,10 +5,10 @@
 HTTP minification server for CSS, HTML, JavaScript, JSON, and SVG.
 
 ## Usage
+```
 npm install
 node server.js [OPTION]
 
-```
 Options:
   -p, --port=4747 The TCP port that the web server will listen on. (default: 4747)
   -h, --help      display this help
