@@ -9,6 +9,7 @@ const server = require( 'fastify' )( {
 server.get( '/', require( './routes/index' ) );
 server.get( '/health-check', require( './routes/health-check' ) );
 server.get( '/get', require( './routes/get' ) );
+server.get( '/file', require( './routes/file' ) );
 
 // Take care of command line options
 const opt = require( 'node-getopt' ).create( [

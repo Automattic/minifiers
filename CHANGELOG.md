@@ -8,6 +8,7 @@
 - On server start error output error to console
 - URL option to not minify
 - Set the correct content length even when no compression options are provided
+- Add support to run against local files
 
 
 ## 8.0.0 : 10 Feb 2023
