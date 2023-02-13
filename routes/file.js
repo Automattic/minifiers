@@ -34,6 +34,8 @@ module.exports = ( request, reply ) => {
 	try {
 		send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
 	} catch ( err ) {
+		console.log( "\n\n1 err - \n\n" );
+		console.log( err );
 		send_error( reply, err );
 	}
 	log.origin_get_ms = parseInt( ( performance.now() - origin_start ) );
