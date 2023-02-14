@@ -11,6 +11,7 @@
 - Add support to run against local files
 - Do not minify if local files have .dev. or .min. in them
 - Use /dev/shm ( if available ) to cache minified local files
+- Return 404 for local file requests that do not exist
 
 
 ## 8.0.0 : 10 Feb 2023

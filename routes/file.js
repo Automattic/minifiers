@@ -40,7 +40,7 @@ module.exports = ( request, reply ) => {
 			send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
 		} catch ( err ) {
 			console.log( err );
-			send_error( reply, err );
+			send_error( reply, err, 404, 10404 );
 		}
 	}
 
@@ -71,7 +71,7 @@ module.exports = ( request, reply ) => {
 		send_reply( fs.readFileSync( read_from ).toString(), reply, accept, level );
 	} catch ( err ) {
 		console.log( err );
-		send_error( reply, err );
+		send_error( reply, err, 404, 10404 );
 	}
 	log.origin_get_ms = parseInt( ( performance.now() - origin_start ) );
 
@@ -139,16 +139,16 @@ module.exports = ( request, reply ) => {
 		;
 	}
 
-	function send_error( reply, err ) {
+	function send_error( reply, err, http_code = 500, error_code = 10000 ) {
 		log.error = err;
 		show_log( log );
 		reply
-			.code( 500 )
+			.code( http_code )
 			.header( 'Content-Type', 'application/json' )
-			.header( 'x-error-code', 10000 )
+			.header( 'x-error-code', error_code )
 			.send( {
 				status: 'error',
-				code: 10000,
+				code: error_code,
 				msg: 'Error requesting the original resource'
 			} )
 		;

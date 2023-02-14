@@ -13,6 +13,13 @@ test( 'GET `/file` -- CSS minify', async () => {
 	;
 } );
 
+test( 'GET `/file` -- 404 not found', async () => {
+	const resp = await supertest( 'http://localhost:4747' )
+		.get( `/file?path=/this/is/not/real` )
+		.expect( 404 )
+	;
+} );
+
 test( 'GET `/file` -- .dev no minify', async () => {
 	const resp = await supertest( 'http://localhost:4747' )
 		.get( `/file?path=tests/bootstrap.dev.css` )
