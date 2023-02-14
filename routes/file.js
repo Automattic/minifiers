@@ -48,10 +48,9 @@ module.exports = ( request, reply ) => {
 	let read_from = path;
 	const cache_file = '/dev/shm/' + path;
 	if ( fs.existsSync( '/dev/shm' ) ) {
+		use_cache = true;
 		log.cache = 'miss';
 		if ( fs.existsSync( cache_file ) ) {
-			use_cache = true;
-
 			const file_stat = fs.statSync( path );
 			const cache_stat = fs.statSync( '/dev/shm/' + path );
 
