@@ -1,5 +1,6 @@
 module.exports = ( request, reply ) => {
-	const fs = require('fs');
+	const fs = require( 'fs' );
+	const fs_path = require( 'path' );
 	const mime = require( 'mime-types' );
 	const minify = require( '../lib/minify' );
 	const compress = require( '../lib/compress' );
@@ -45,14 +46,14 @@ module.exports = ( request, reply ) => {
 
 	log.cache = 'no';
 	let read_from = path;
-	const cache_file = '/dev/shm' + path;
+	const cache_file = '/dev/shm/' + path;
 	if ( fs.existsSync( '/dev/shm' ) ) {
 		log.cache = 'miss';
 		if ( fs.existsSync( cache_file ) ) {
 			use_cache = true;
 
 			const file_stat = fs.statSync( path );
-			const cache_stat = fs.statSync( '/dev/shm' + path );
+			const cache_stat = fs.statSync( '/dev/shm/' + path );
 
 			if ( cache_stat.mtimeMs > file_stat.mtimeMs ) {
 				log.cache = 'hit';
@@ -101,6 +102,7 @@ module.exports = ( request, reply ) => {
 
 		if ( use_cache ) {
 			try {
+				fs.mkdirSync( fs_path.dirname( cache_file ), { recursive: true } );
 				fs.writeFileSync( cache_file, body );
 			} catch( err ) {
 				console.log( err );
