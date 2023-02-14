@@ -32,11 +32,39 @@ module.exports = ( request, reply ) => {
 		do_minify = false;
 	}
 	log.minify = do_minify;
+	let use_cache = false;
+
+	if ( !do_minify ) {
+		try {
+			send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
+		} catch ( err ) {
+			console.log( err );
+			send_error( reply, err );
+		}
+	}
+
+	log.cache = 'no';
+	let read_from = path;
+	const cache_file = '/dev/shm' + path;
+	if ( fs.existsSync( '/dev/shm' ) ) {
+		log.cache = 'miss';
+		if ( fs.existsSync( cache_file ) ) {
+			use_cache = true;
+
+			const file_stat = fs.statSync( path );
+			const cache_stat = fs.statSync( '/dev/shm' + path );
+
+			if ( cache_stat.mtimeMs > file_stat.mtimeMs ) {
+				log.cache = 'hit';
+				read_from = cache_file;
+			}
+		}
+	}
 
 	// Go get the original
 	const origin_start = performance.now();
 	try {
-		send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
+		send_reply( fs.readFileSync( read_from ).toString(), reply, accept, level );
 	} catch ( err ) {
 		console.log( err );
 		send_error( reply, err );
@@ -54,6 +82,7 @@ module.exports = ( request, reply ) => {
 				.code( 200 )
 				.header( 'Content-Type', content_type )
 				.header( 'x-minify', 'f' )
+				.header( 'x-cache', 'no' )
 				.send( body )
 			;
 		}
@@ -69,6 +98,15 @@ module.exports = ( request, reply ) => {
 		log.minify_size_diff_percent = parseInt(
 			( ( log.minify_size_diff / log.original_size ) * 100 )
 		);
+
+		if ( use_cache ) {
+			try {
+				fs.writeFileSync( cache_file, body );
+			} catch( err ) {
+				console.log( err );
+				send_error( reply, err );
+			}
+		}
 
 		// If no type was matched then we are in a pass through condition,
 		// in which case we skip compression and go directly to providing
@@ -91,6 +129,7 @@ module.exports = ( request, reply ) => {
 			.header( 'Content-Encoding', encoding )
 			.header( 'x-compression-level', level )
 			.header( 'x-minify', 't' )
+			.header( 'x-cache', log.cache )
 			.send( body )
 		;
 	}
