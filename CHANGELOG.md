@@ -9,6 +9,7 @@
 - URL option to not minify
 - Set the correct content length even when no compression options are provided
 - Add support to run against local files
+- Do not minify if local files have .dev. or .min. in them
 
 
 ## 8.0.0 : 10 Feb 2023

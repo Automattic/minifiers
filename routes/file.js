@@ -27,6 +27,10 @@ module.exports = ( request, reply ) => {
 	) {
 		do_minify = false
 	}
+
+	if ( path.match( /\.(dev|min)\./ ) ) {
+		do_minify = false;
+	}
 	log.minify = do_minify;
 
 	// Go get the original
@@ -34,7 +38,6 @@ module.exports = ( request, reply ) => {
 	try {
 		send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
 	} catch ( err ) {
-		console.log( "\n\n1 err - \n\n" );
 		console.log( err );
 		send_error( reply, err );
 	}
