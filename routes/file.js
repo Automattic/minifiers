@@ -46,13 +46,17 @@ module.exports = ( request, reply ) => {
 
 	log.cache = 'no';
 	let read_from = path;
-	const cache_file = '/dev/shm/' + path;
+	const cache_file = '/dev/shm/a8c-minify/' + path;
 	if ( fs.existsSync( '/dev/shm' ) ) {
+		if ( !fs.existsSync( '/dev/shm/a8c-minify' ) ) {
+			fs.mkdirSync( '/dev/shm/a8c-minify' );
+		}
+
 		use_cache = true;
 		log.cache = 'miss';
 		if ( fs.existsSync( cache_file ) ) {
 			const file_stat = fs.statSync( path );
-			const cache_stat = fs.statSync( '/dev/shm/' + path );
+			const cache_stat = fs.statSync( '/dev/shm/a8c-minify/' + path );
 
 			if ( cache_stat.mtimeMs > file_stat.mtimeMs ) {
 				log.cache = 'hit';
