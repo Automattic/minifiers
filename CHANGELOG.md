@@ -12,6 +12,7 @@
 - Do not minify if local files have .dev. or .min. in them
 - Use /dev/shm ( if available ) to cache minified local files
 - Return 404 for local file requests that do not exist
+- Include an etag for local file requests
 
 
 ## 8.0.0 : 10 Feb 2023

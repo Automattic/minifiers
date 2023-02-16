@@ -35,6 +35,13 @@ module.exports = ( request, reply ) => {
 	log.minify = do_minify;
 	let use_cache = false;
 
+	try {
+		const file_stat = fs.statSync( path );
+		const etag = 'W/' + file_stat.size + '-' + file_stat.mtimeMs;
+	} catch ( error ) {
+		console.log( error );
+	}
+
 	if ( !do_minify ) {
 		try {
 			send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
@@ -55,7 +62,6 @@ module.exports = ( request, reply ) => {
 		use_cache = true;
 		log.cache = 'miss';
 		if ( fs.existsSync( cache_file ) ) {
-			const file_stat = fs.statSync( path );
 			const cache_stat = fs.statSync( '/dev/shm/a8c-minify/' + path );
 
 			if ( cache_stat.mtimeMs > file_stat.mtimeMs ) {
@@ -82,13 +88,19 @@ module.exports = ( request, reply ) => {
 
 		if ( do_minify === false ) {
 			show_log( log );
+
 			reply
 				.code( 200 )
 				.header( 'Content-Type', content_type )
 				.header( 'x-minify', 'f' )
 				.header( 'x-minify-cache', 'no' )
-				.send( body )
 			;
+
+			if ( typeof etag === 'string' ) {
+				reply.header( 'Etag', etag );
+			}
+
+			reply.send( body );
 		}
 
 		log.original_size = body.length;
@@ -135,8 +147,13 @@ module.exports = ( request, reply ) => {
 			.header( 'x-minify-compression-level', level )
 			.header( 'x-minify', 't' )
 			.header( 'x-minify-cache', log.cache )
-			.send( body )
 		;
+
+		if ( typeof etag === 'string' ) {
+			reply.header( 'Etag', etag );
+		}
+
+		reply.send( body );
 	}
 
 	function send_error( reply, err, http_code = 500, error_code = 10000 ) {
