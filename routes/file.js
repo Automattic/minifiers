@@ -41,6 +41,7 @@ module.exports = ( request, reply ) => {
 	} catch ( error ) {
 		console.log( error );
 		send_error( reply, error, 404, 10501 );
+		return;
 	}
 
 	if ( !do_minify ) {
