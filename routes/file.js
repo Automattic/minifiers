@@ -40,6 +40,7 @@ module.exports = ( request, reply ) => {
 		const etag = 'W/' + file_stat.size + '-' + file_stat.mtimeMs;
 	} catch ( error ) {
 		console.log( error );
+		send_error( reply, error, 500, 10501 );
 	}
 
 	if ( !do_minify ) {
