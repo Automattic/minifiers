@@ -35,13 +35,15 @@ module.exports = ( request, reply ) => {
 	log.minify = do_minify;
 	let use_cache = false;
 
+	let file_stat;
+	let etag;
+
 	try {
-		const file_stat = fs.statSync( path );
-		const etag = 'W/' + file_stat.size + '-' + file_stat.mtimeMs;
+		file_stat = fs.statSync( path );
+		etag = 'W/' + file_stat.size + '-' + file_stat.mtimeMs;
 	} catch ( error ) {
 		console.log( error );
 		send_error( reply, error, 404, 10501 );
-		return;
 	}
 
 	if ( !do_minify ) {
@@ -65,10 +67,6 @@ module.exports = ( request, reply ) => {
 		log.cache = 'miss';
 		if ( fs.existsSync( cache_file ) ) {
 			const cache_stat = fs.statSync( '/dev/shm/a8c-minify/' + path );
-
-			if ( typeof file_stat === 'undefined' ) {
-				const file_stat = fs.statSync( path );
-			}
 
 			if ( cache_stat.mtimeMs > file_stat.mtimeMs ) {
 				log.cache = 'hit';
