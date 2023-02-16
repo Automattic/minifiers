@@ -66,6 +66,10 @@ module.exports = ( request, reply ) => {
 		if ( fs.existsSync( cache_file ) ) {
 			const cache_stat = fs.statSync( '/dev/shm/a8c-minify/' + path );
 
+			if ( typeof file_stat === 'undefined' ) {
+				const file_stat = fs.statSync( path );
+			}
+
 			if ( cache_stat.mtimeMs > file_stat.mtimeMs ) {
 				log.cache = 'hit';
 				read_from = cache_file;
