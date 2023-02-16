@@ -17,7 +17,7 @@ test( 'GET `/get` -- SVG & gzip level 9', async () => {
 		.expect( 200 )
 		.expect( 'Content-Type', /image\/svg\+xml/ )
 		.expect( 'content-encoding', 'gzip' )
-		.expect( 'x-compression-level', '9' )
+		.expect( 'x-minify-compression-level', '9' )
 	;
 } );
 
@@ -27,7 +27,7 @@ test( 'GET `/get` -- SVG & br level 11', async () => {
 		.expect( 200 )
 		.expect( 'Content-Type', /image\/svg\+xml/ )
 		.expect( 'content-encoding', 'br' )
-		.expect( 'x-compression-level', '11' )
+		.expect( 'x-minify-compression-level', '11' )
 	;
 } );
 
@@ -37,6 +37,6 @@ test( 'GET `/get` -- SVG & deflate level 8', async () => {
 		.expect( 200 )
 		.expect( 'Content-Type', /image\/svg\+xml/ )
 		.expect( 'content-encoding', 'deflate' )
-		.expect( 'x-compression-level', '8' )
+		.expect( 'x-minify-compression-level', '8' )
 	;
 } );

@@ -86,7 +86,7 @@ module.exports = ( request, reply ) => {
 			.code( 200 )
 			.header( 'Content-Type', resp.headers['content-type'] )
 			.header( 'Content-Encoding', encoding )
-			.header( 'x-compression-level', level )
+			.header( 'x-minify-compression-level', level )
 			.header( 'x-minify', 't' )
 			.send( body )
 		;
@@ -98,7 +98,7 @@ module.exports = ( request, reply ) => {
 		reply
 			.code( 500 )
 			.header( 'Content-Type', 'application/json' )
-			.header( 'x-error-code', 10000 )
+			.header( 'x-minify-error-code', 10000 )
 			.send( {
 				status: 'error',
 				code: 10000,

@@ -18,7 +18,7 @@ test( 'GET `/get` -- JS & gzip level 9', async () => {
 		.expect( 200 )
 		.expect( 'Content-Type', /application\/javascript/ )
 		.expect( 'content-encoding', 'gzip' )
-		.expect( 'x-compression-level', '9' )
+		.expect( 'x-minify-compression-level', '9' )
 	;
 } );
 
@@ -28,7 +28,7 @@ test( 'GET `/get` -- JS & br level 11', async () => {
 		.expect( 200 )
 		.expect( 'Content-Type', /application\/javascript/ )
 		.expect( 'content-encoding', 'br' )
-		.expect( 'x-compression-level', '11' )
+		.expect( 'x-minify-compression-level', '11' )
 	;
 } );
 
@@ -38,6 +38,6 @@ test( 'GET `/get` -- JS & deflate level 8', async () => {
 		.expect( 200 )
 		.expect( 'Content-Type', /application\/javascript/ )
 		.expect( 'content-encoding', 'deflate' )
-		.expect( 'x-compression-level', '8' )
+		.expect( 'x-minify-compression-level', '8' )
 	;
 } );
