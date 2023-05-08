@@ -13,6 +13,7 @@
 - Use /dev/shm ( if available ) to cache minified local files
 - Return 404 for local file requests that do not exist
 - Include an etag for local file requests
+- Add OPTIONS support for minified resources
 
 
 ## 8.0.0 : 10 Feb 2023

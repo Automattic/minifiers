@@ -8,8 +8,10 @@ const server = require( 'fastify' )( {
 // Routes
 server.get( '/', require( './routes/index' ) );
 server.get( '/health-check', require( './routes/health-check' ) );
-server.get( '/get', require( './routes/get' ) );
 server.get( '/file', require( './routes/file' ) );
+
+server.get( '/get', require( './routes/get' ) );
+server.options( '/get', require( './routes/get' ) );
 
 // Take care of command line options
 const opt = require( 'node-getopt' ).create( [
