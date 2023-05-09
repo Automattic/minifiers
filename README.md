@@ -1,6 +1,6 @@
 # minifiers
 
-[![Tests](https://github.com/Automattic/minifiers/actions/workflows/requests.yml/badge.svg?branch=acidburn)](https://github.com/Automattic/minifiers/actions)
+[![Tests](https://github.com/Automattic/minifiers/actions/workflows/requests.yml/badge.svg)](https://github.com/Automattic/minifiers/actions)
 
 HTTP minification server for CSS, HTML, JavaScript, JSON, and SVG.
 
