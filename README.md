@@ -14,6 +14,13 @@ Options:
   -h, --help      display this help
 ```
 
+## Docker
+
+```
+$ docker build -t minifiers .
+$ docker run -p 4747:4747 minifiers
+```
+
 ## Tests
 
 With the minifiers server already running, do `npm test`.
