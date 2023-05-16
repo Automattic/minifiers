@@ -82,7 +82,7 @@ module.exports = ( request, reply ) => {
 	}
 	log.origin_get_ms = parseInt( performance.now() - origin_start );
 
-	function send_reply( body, reply, accept, level ) {
+	async function send_reply( body, reply, accept, level ) {
 		let encoding = '';
 		let type = false;
 		let content_type = mime.lookup( path );
@@ -106,7 +106,7 @@ module.exports = ( request, reply ) => {
 		log.original_size = body.length;
 
 		const minify_start = performance.now();
-		[ body, type ] = minify( body, content_type );
+		[ body, type ] = await minify( body, content_type );
 		log.minify_ms = parseInt( performance.now() - minify_start );
 		log.type = type;
 		log.minify_size = body.length;
