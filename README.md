@@ -47,6 +47,9 @@ http://localhost:4747/get?minify=false&url=https://stackpath.bootstrapcdn.com/bo
 
 ## Debugging and Observability
 
+Before running, set these environment variables to change the default behavior:
+
 ```sh
 export DEBUG_MEMORY=1 # to enable memory usage logging to console
+export DEBUG_POOL=1   # to enable pool stat logging to console
 ```
