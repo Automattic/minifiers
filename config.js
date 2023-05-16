@@ -14,7 +14,7 @@ module.exports = () => {
 			regex: new RegExp(
 				/^(application\/javascript)|(application\/x-javascript)|(application\/ecmascript)|(text\/javascript)|(text\/ecmascript)/
 			),
-			min_func: require( './lib/js-min.js' ),
+			min_func: require( './lib/processes/js-min-parent.js' ),
 			type: 'string',
 		},
 		json: {
