@@ -33,7 +33,7 @@ module.exports = ( request, reply ) => {
 		.catch( ( err ) => send_error( reply, err ) );
 	log.origin_get_ms = parseInt( performance.now() - origin_start );
 
-	function send_reply( reply, resp, accept, level ) {
+	async function send_reply( reply, resp, accept, level ) {
 		let encoding = '';
 		let body = '';
 		let type = false;
@@ -53,7 +53,7 @@ module.exports = ( request, reply ) => {
 		log.original_size = body.length;
 
 		const minify_start = performance.now();
-		[ body, type ] = minify( body, resp.header[ 'content-type' ] );
+		[ body, type ] = await minify( body, resp.header[ 'content-type' ] );
 		log.minify_ms = parseInt( performance.now() - minify_start );
 		log.type = type;
 		log.minify_size = body.length;
