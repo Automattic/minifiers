@@ -1,5 +1,8 @@
 'use strict';
 
+const maybeEnableMemoryDebugger = require('./lib/memory-debugger');
+maybeEnableMemoryDebugger();
+
 const server = require( 'fastify' )( {
 	logger: true,
 	maxParamLength: 50000, // this defaults to 100, which is way too small

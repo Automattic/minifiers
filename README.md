@@ -44,3 +44,9 @@ http://localhost:4747/get?with=br&level=11&url=https://stackpath.bootstrapcdn.co
 `
 http://localhost:4747/get?minify=false&url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css
 `
+
+## Debugging and Observability
+
+```sh
+export DEBUG_MEMORY=1 # to enable memory usage logging to console
+```
