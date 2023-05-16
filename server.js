@@ -1,12 +1,15 @@
 'use strict';
 
-const maybeEnableMemoryDebugger = require('./lib/memory-debugger');
+const maybeEnableMemoryDebugger = require( './lib/memory-debugger' );
 maybeEnableMemoryDebugger();
 
 const server = require( 'fastify' )( {
-	logger: true,
+	logger: process.env.DEBUG_QUIET_REQUEST ? false : true,
 	maxParamLength: 50000, // this defaults to 100, which is way too small
 } );
+if ( process.env.DEBUG_QUIET_REQUEST ) {
+	console.log( 'Quiet Mode enabled: Per request logging will not appear.' );
+}
 
 // Routes
 server.get( '/', require( './routes/index' ) );

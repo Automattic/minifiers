@@ -168,6 +168,9 @@ module.exports = ( request, reply ) => {
 	}
 
 	function show_log( msg ) {
+		if ( process.env.DEBUG_QUIET_REQUEST ) {
+			return;
+		}
 		const time_stamp = new Date();
 		msg.when = time_stamp.toISOString();
 		console.log( JSON.stringify( msg ) );

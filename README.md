@@ -49,7 +49,18 @@ http://localhost:4747/get?minify=false&url=https://stackpath.bootstrapcdn.com/bo
 
 Before running, set these environment variables to change the default behavior:
 
-```sh
-export DEBUG_MEMORY=1 # to enable memory usage logging to console
-export DEBUG_POOL=1   # to enable pool stat logging to console
+```bash
+export DEBUG_MEMORY=1        # to enable memory usage logging to console
+export DEBUG_POOL=1          # to enable pool stat logging to console
+export DEBUG_QUIET_REQUEST=1 # to disable request logging to console
+```
+
+These 3 work well together when doing a load test.
+
+For fish shell users:
+
+```fish
+set -x DEBUG_MEMORY 1
+set -x DEBUG_POOL 1
+set -x DEBUG_QUIET_REQUEST 1
 ```
