@@ -40,6 +40,11 @@ const opts = {
 The exact meaning of the settings is documented in the [generic-pool
 readme](https://www.npmjs.com/package/generic-pool).
 
+---
+
+- The environment variable `MINIFIERS_MINIFICATIONS_PER_PROCESS` controls the number of minifications
+  that each child process should handle before that process restarts.
+
 ## Tests
 
 With the minifiers server already running, do `npm test`.
