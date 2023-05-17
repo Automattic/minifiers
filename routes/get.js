@@ -69,12 +69,7 @@ module.exports = ( request, reply ) => {
 			// the original version back.
 			do_compress = false;
 		}
-		console.log( { do_compress } );
-		console.log( process.env.MINIFIERS_DISABLE_COMPRESSION );
 
-		// If no type was matched then we are in a pass through condition,
-		// in which case we skip compression and go directly to providing
-		// the original version back.
 		if ( do_compress ) {
 			const compress_start = performance.now();
 			[ body, encoding ] = compress( body, accept, level );
