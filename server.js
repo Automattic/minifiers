@@ -1,6 +1,6 @@
 'use strict';
 
-const maybeEnableMemoryDebugger = require( './lib/memory-debugger' );
+const maybeEnableMemoryDebugger = require( './lib/debug/memory-debugger' );
 maybeEnableMemoryDebugger();
 
 const server = require( 'fastify' )( {
