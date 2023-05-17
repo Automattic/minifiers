@@ -4,6 +4,7 @@ module.exports = ( request, reply ) => {
 	const mime = require( 'mime-types' );
 	const minify = require( '../lib/minify' );
 	const compress = require( '../lib/compress' );
+	const { envBool } = require( '../lib/util' );
 	const { PerformanceObserver, performance } = require( 'perf_hooks' );
 
 	const path = request.query.path;
@@ -124,7 +125,7 @@ module.exports = ( request, reply ) => {
 		}
 
 		let do_compress = true;
-		if ( process.env.MINIFIERS_DISABLE_COMPRESSION ) {
+		if ( envBool( 'MINIFIERS_DISABLE_COMPRESSION' ) ) {
 			do_compress = false;
 		} else if ( type === false ) {
 			// If no type was matched then we are in a pass through condition,

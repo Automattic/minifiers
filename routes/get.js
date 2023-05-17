@@ -2,6 +2,7 @@ module.exports = ( request, reply ) => {
 	const superagent = require( 'superagent' );
 	const minify = require( '../lib/minify' );
 	const compress = require( '../lib/compress' );
+	const { envBool } = require( '../lib/util' );
 	const { PerformanceObserver, performance } = require( 'perf_hooks' );
 
 	const url = request.query.url;
@@ -61,7 +62,7 @@ module.exports = ( request, reply ) => {
 		log.minify_size_diff_percent = parseInt( ( log.minify_size_diff / log.original_size ) * 100 );
 
 		let do_compress = true;
-		if ( process.env.MINIFIERS_DISABLE_COMPRESSION ) {
+		if ( envBool( 'MINIFIERS_DISABLE_COMPRESSION' ) ) {
 			do_compress = false;
 		} else if ( type === false ) {
 			// If no type was matched then we are in a pass through condition,
