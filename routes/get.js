@@ -85,7 +85,11 @@ module.exports = ( request, reply ) => {
 	}
 
 	function send_error( reply, err ) {
-		log.error = err;
+		if ( err instanceof Error ) {
+			log.error = err.message;
+		} else {
+			log.error = err;
+		}
 		show_log( log );
 		reply
 			.code( 500 )
