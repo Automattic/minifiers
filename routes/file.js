@@ -1,4 +1,4 @@
-module.exports = ( request, reply ) => {
+module.exports = async ( request, reply ) => {
 	const fs = require( 'fs' );
 	const fs_path = require( 'path' );
 	const mime = require( 'mime-types' );
@@ -46,7 +46,7 @@ module.exports = ( request, reply ) => {
 
 	if ( ! do_minify ) {
 		try {
-			send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
+			await send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
 		} catch ( err ) {
 			console.log( err );
 			send_error( reply, err, 404, 10404 );
@@ -76,7 +76,7 @@ module.exports = ( request, reply ) => {
 	// Go get the original
 	const origin_start = performance.now();
 	try {
-		send_reply( fs.readFileSync( read_from ).toString(), reply, accept, level );
+		await send_reply( fs.readFileSync( read_from ).toString(), reply, accept, level );
 	} catch ( err ) {
 		console.log( err );
 		send_error( reply, err, 404, 10404 );
