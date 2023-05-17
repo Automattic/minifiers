@@ -60,10 +60,20 @@ module.exports = ( request, reply ) => {
 		log.minify_size_diff = log.original_size - log.minify_size;
 		log.minify_size_diff_percent = parseInt( ( log.minify_size_diff / log.original_size ) * 100 );
 
+		let do_compress = true;
+		if ( process.env.MINIFIERS_DISABLE_COMPRESSION ) {
+			do_compress = false;
+		} else if ( type === false ) {
+			// If no type was matched then we are in a pass through condition,
+			// in which case we skip compression and go directly to providing
+			// the original version back.
+			do_compress = false;
+		}
+
 		// If no type was matched then we are in a pass through condition,
 		// in which case we skip compression and go directly to providing
 		// the original version back.
-		if ( type !== false ) {
+		if ( do_compress ) {
 			const compress_start = performance.now();
 			[ body, encoding ] = compress( body, accept, level );
 			log.compress_ms = parseInt( performance.now() - compress_start );
