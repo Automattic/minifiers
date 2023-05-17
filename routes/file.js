@@ -11,7 +11,7 @@ module.exports = ( request, reply ) => {
 	let log = {};
 	log.path = path;
 
-	let accept = request.headers['accept-encoding'];
+	let accept = request.headers[ 'accept-encoding' ];
 	if ( typeof request.query.with === 'string' ) {
 		accept = request.query.with;
 	}
@@ -22,11 +22,8 @@ module.exports = ( request, reply ) => {
 	}
 
 	let do_minify = true;
-	if (
-		typeof request.query.minify === 'string'
-		&& request.query.minify === 'false'
-	) {
-		do_minify = false
+	if ( typeof request.query.minify === 'string' && request.query.minify === 'false' ) {
+		do_minify = false;
 	}
 
 	if ( path.match( /\.(dev|min)\./ ) ) {
@@ -46,7 +43,7 @@ module.exports = ( request, reply ) => {
 		send_error( reply, error, 404, 10501 );
 	}
 
-	if ( !do_minify ) {
+	if ( ! do_minify ) {
 		try {
 			send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
 		} catch ( err ) {
@@ -59,7 +56,7 @@ module.exports = ( request, reply ) => {
 	let read_from = path;
 	const cache_file = '/dev/shm/a8c-minify/' + path;
 	if ( fs.existsSync( '/dev/shm' ) ) {
-		if ( !fs.existsSync( '/dev/shm/a8c-minify' ) ) {
+		if ( ! fs.existsSync( '/dev/shm/a8c-minify' ) ) {
 			fs.mkdirSync( '/dev/shm/a8c-minify' );
 		}
 
@@ -83,7 +80,7 @@ module.exports = ( request, reply ) => {
 		console.log( err );
 		send_error( reply, err, 404, 10404 );
 	}
-	log.origin_get_ms = parseInt( ( performance.now() - origin_start ) );
+	log.origin_get_ms = parseInt( performance.now() - origin_start );
 
 	function send_reply( body, reply, accept, level ) {
 		let encoding = '';
@@ -97,8 +94,7 @@ module.exports = ( request, reply ) => {
 				.code( 200 )
 				.header( 'Content-Type', content_type )
 				.header( 'x-minify', 'f' )
-				.header( 'x-minify-cache', 'no' )
-			;
+				.header( 'x-minify-cache', 'no' );
 
 			if ( typeof etag === 'string' ) {
 				reply.header( 'Etag', etag );
@@ -111,19 +107,17 @@ module.exports = ( request, reply ) => {
 
 		const minify_start = performance.now();
 		[ body, type ] = minify( body, content_type );
-		log.minify_ms = parseInt( ( performance.now() - minify_start ) );
+		log.minify_ms = parseInt( performance.now() - minify_start );
 		log.type = type;
 		log.minify_size = body.length;
 		log.minify_size_diff = log.original_size - log.minify_size;
-		log.minify_size_diff_percent = parseInt(
-			( ( log.minify_size_diff / log.original_size ) * 100 )
-		);
+		log.minify_size_diff_percent = parseInt( ( log.minify_size_diff / log.original_size ) * 100 );
 
 		if ( use_cache ) {
 			try {
 				fs.mkdirSync( fs_path.dirname( cache_file ), { recursive: true } );
 				fs.writeFileSync( cache_file, body );
-			} catch( err ) {
+			} catch ( err ) {
 				console.log( err );
 				send_error( reply, err );
 			}
@@ -135,11 +129,11 @@ module.exports = ( request, reply ) => {
 		if ( type !== false ) {
 			const compress_start = performance.now();
 			[ body, encoding ] = compress( body, accept, level );
-			log.compress_ms = parseInt( ( performance.now() - compress_start ) );
+			log.compress_ms = parseInt( performance.now() - compress_start );
 			log.compress_size = body.length;
 			log.compress_size_diff = log.minify_size - log.compress_size;
 			log.compress_size_diff_percent = parseInt(
-				( ( log.compress_size_diff / log.minify_size ) * 100 )
+				( log.compress_size_diff / log.minify_size ) * 100
 			);
 		}
 
@@ -150,8 +144,7 @@ module.exports = ( request, reply ) => {
 			.header( 'Content-Encoding', encoding )
 			.header( 'x-minify-compression-level', level )
 			.header( 'x-minify', 't' )
-			.header( 'x-minify-cache', log.cache )
-		;
+			.header( 'x-minify-cache', log.cache );
 
 		if ( typeof etag === 'string' ) {
 			reply.header( 'Etag', etag );
@@ -170,9 +163,8 @@ module.exports = ( request, reply ) => {
 			.send( {
 				status: 'error',
 				code: error_code,
-				msg: 'Error requesting the original resource'
-			} )
-		;
+				msg: 'Error requesting the original resource',
+			} );
 	}
 
 	function show_log( msg ) {

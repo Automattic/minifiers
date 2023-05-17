@@ -19,9 +19,11 @@
 	},
 	"devDependencies": {
 		"jest": "^29.4.2",
+		"prettier": "npm:wp-prettier@^2.8.5",
 		"supertest": "^6.3.3"
 	},
 	"scripts": {
+		"prettify": "prettier --write \"lib/**/*\" \"routes/**/*\" \"tests/**/*.test.js\" \"server.js\" \"config.js\"",
 		"test": "node --dns-result-order=ipv4first ./node_modules/jest/bin/jest.js ./tests"
 	}
 }
