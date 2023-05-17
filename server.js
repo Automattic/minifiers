@@ -8,7 +8,7 @@ const server = require( 'fastify' )( {
 	maxParamLength: 50000, // this defaults to 100, which is way too small
 } );
 if ( process.env.DEBUG_QUIET_REQUEST ) {
-	console.log( 'Quiet Mode enabled: Per request logging will not appear.' );
+	console.debug( 'Quiet mode enabled.' );
 }
 
 // Routes
