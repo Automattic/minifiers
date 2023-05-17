@@ -145,13 +145,16 @@ module.exports = ( request, reply ) => {
 		}
 
 		show_log( log );
-		reply
-			.code( 200 )
-			.header( 'Content-Type', content_type )
-			.header( 'Content-Encoding', encoding )
-			.header( 'x-minify-compression-level', level )
-			.header( 'x-minify', 't' )
-			.header( 'x-minify-cache', log.cache );
+		reply.code( 200 );
+		reply.header( 'Content-Type', content_type );
+		if ( encoding !== '' ) {
+			reply.header( 'Content-Encoding', encoding );
+		}
+		if ( do_compress ) {
+			reply.header( 'x-minify-compression-level', level );
+		}
+		reply.header( 'x-minify', 't' );
+		reply.header( 'x-minify-cache', log.cache );
 
 		if ( typeof etag === 'string' ) {
 			reply.header( 'Etag', etag );

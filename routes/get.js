@@ -69,6 +69,8 @@ module.exports = ( request, reply ) => {
 			// the original version back.
 			do_compress = false;
 		}
+		console.log( { do_compress } );
+		console.log( process.env.MINIFIERS_DISABLE_COMPRESSION );
 
 		// If no type was matched then we are in a pass through condition,
 		// in which case we skip compression and go directly to providing
@@ -85,13 +87,17 @@ module.exports = ( request, reply ) => {
 		}
 
 		show_log( log );
-		reply
-			.code( 200 )
-			.header( 'Content-Type', resp.headers[ 'content-type' ] )
-			.header( 'Content-Encoding', encoding )
-			.header( 'x-minify-compression-level', level )
-			.header( 'x-minify', 't' )
-			.send( body );
+
+		reply.code( 200 );
+		reply.header( 'Content-Type', resp.headers[ 'content-type' ] );
+		if ( encoding !== '' ) {
+			reply.header( 'Content-Encoding', encoding );
+		}
+		if ( do_compress ) {
+			reply.header( 'x-minify-compression-level', level );
+		}
+		reply.header( 'x-minify', 't' );
+		reply.send( body );
 	}
 
 	function send_error( reply, err ) {
