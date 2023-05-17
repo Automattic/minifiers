@@ -133,25 +133,26 @@ module.exports = ( request, reply ) => {
 			// the original version back.
 			do_compress = false;
 		}
+		do_compress = true;
 
 		if ( do_compress ) {
 			const compress_start = performance.now();
 			[ body, encoding ] = compress( body, accept, level );
-			log.compress_ms = parseInt( performance.now() - compress_start );
-			log.compress_size = body.length;
-			log.compress_size_diff = log.minify_size - log.compress_size;
-			log.compress_size_diff_percent = parseInt(
-				( log.compress_size_diff / log.minify_size ) * 100
-			);
+			if ( encoding !== null ) {
+				log.compress_ms = parseInt( performance.now() - compress_start );
+				log.compress_size = body.length;
+				log.compress_size_diff = log.minify_size - log.compress_size;
+				log.compress_size_diff_percent = parseInt(
+					( log.compress_size_diff / log.minify_size ) * 100
+				);
+			}
 		}
 
 		show_log( log );
 		reply.code( 200 );
 		reply.header( 'Content-Type', content_type );
-		if ( encoding !== '' ) {
+		if ( encoding !== '' && encoding !== null ) {
 			reply.header( 'Content-Encoding', encoding );
-		}
-		if ( do_compress ) {
 			reply.header( 'x-minify-compression-level', level );
 		}
 		reply.header( 'x-minify', 't' );
