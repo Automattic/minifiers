@@ -47,6 +47,10 @@ readme](https://www.npmjs.com/package/generic-pool).
 
 * Set `MINIFIERS_DISABLE_COMPRESSION` to 1 to disable compression.
 
+* Set `MINIFIERS_BASE_PATH` to choose a path of files served through the
+  /file endpoint. May be absolute or relative. If relative, relative to the
+  'lib' directory. Defaults to the repository root.
+
 ## Tests
 
 With the minifiers server already running, do `npm test`.
