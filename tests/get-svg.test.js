@@ -1,22 +1,11 @@
 'use strict';
 
-const { startServer, stopServer } = require( './test-server-utils' );
+const { getSharedServerPort } = require( './test-server-utils' );
 const supertest = require( 'supertest' );
 const target_url = 'https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/svg2009.svg';
 
 describe( 'get-svg: Default environment', () => {
-	let server;
-	let request;
-
-	beforeAll( async () => {
-		const { server: serverInstance, port } = await startServer( {} );
-		server = serverInstance;
-		request = supertest( `http://localhost:${ port }` );
-	} );
-
-	afterAll( () => {
-		return stopServer( server );
-	} );
+	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
 
 	test( 'GET `/get` -- SVG', async () => {
 		const resp = await request

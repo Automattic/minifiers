@@ -1,22 +1,11 @@
 'use strict';
 
-const { startServer, stopServer } = require( './test-server-utils' );
+const { getSharedServerPort } = require( './test-server-utils' );
 const supertest = require( 'supertest' );
 const target_url = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js';
 
 describe( 'get-js: Default environment', () => {
-	let server;
-	let request;
-
-	beforeAll( async () => {
-		const { server: serverInstance, port } = await startServer( {} );
-		server = serverInstance;
-		request = supertest( `http://localhost:${ port }` );
-	} );
-
-	afterAll( () => {
-		return stopServer( server );
-	} );
+	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
 
 	test( 'GET `/get` -- JS', async () => {
 		const resp = await request

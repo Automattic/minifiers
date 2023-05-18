@@ -1,22 +1,11 @@
 'use strict';
 
-const { startServer, stopServer } = require( './test-server-utils' );
+const { getSharedServerPort } = require( './test-server-utils' );
 const supertest = require( 'supertest' );
 const target_url = 'https://s0.wp.com/wp-content/themes/pub/twentytwentytwo/theme.json';
 
 describe( 'get-json: Default environment', () => {
-	let server;
-	let request;
-
-	beforeAll( async () => {
-		const { server: serverInstance, port } = await startServer( {} );
-		server = serverInstance;
-		request = supertest( `http://localhost:${ port }` );
-	} );
-
-	afterAll( () => {
-		return stopServer( server );
-	} );
+	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
 
 	test( 'GET `/get` -- JSON', async () => {
 		const resp = await request

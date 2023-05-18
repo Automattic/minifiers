@@ -10,6 +10,9 @@ const { exec } = require( 'child_process' );
 function generateRandomPort() {
 	return Math.floor( Math.random() * 6000 ) + 3000;
 }
+function getSharedServerPort() {
+	return 4749;
+}
 
 /**
  * Starts a server with the provided environment variables.
@@ -18,9 +21,11 @@ function generateRandomPort() {
  * @returns {Promise} A Promise that resolves to an object containing the server instance
  *                    and the port it is listening on.
  */
-function startServer( env ) {
+function startServer( env, port = null ) {
 	return new Promise( ( resolve, reject ) => {
-		const port = generateRandomPort();
+		if ( port === null ) {
+			port = generateRandomPort();
+		}
 		const server = exec(
 			`npm start -- -p ${ port }`,
 			{ env: { ...process.env, ...env } },
@@ -52,4 +57,4 @@ function stopServer( server ) {
 	} );
 }
 
-module.exports = { stopServer, startServer };
+module.exports = { stopServer, startServer, getSharedServerPort };

@@ -1,22 +1,11 @@
 'use strict';
 
-const { startServer, stopServer } = require( './test-server-utils' );
+const { getSharedServerPort } = require( './test-server-utils' );
 const supertest = require( 'supertest' );
 const target_url = 'https://wordpress.com/wp-content/themes/pub/vermilion-christmas/README.html';
 
 describe( 'get-html: Default environment', () => {
-	let server;
-	let request;
-
-	beforeAll( async () => {
-		const { server: serverInstance, port } = await startServer( {} );
-		server = serverInstance;
-		request = supertest( `http://localhost:${ port }` );
-	} );
-
-	afterAll( () => {
-		return stopServer( server );
-	} );
+	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
 
 	test( 'GET `/get` -- HTML', async () => {
 		const resp = await request
