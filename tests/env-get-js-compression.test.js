@@ -16,7 +16,7 @@ const expectUncompressedSizeJquery = ( headers ) => {
 	expect( length ).toBeLessThanOrEqual( 100000 );
 };
 
-describe( 'get-js-compression: MINIFIERS_DISABLE_COMPRESSION=1 in env', () => {
+describe( 'env-get-js-compression: MINIFIERS_DISABLE_COMPRESSION=1 in env', () => {
 	let server;
 	let request;
 
@@ -54,7 +54,7 @@ describe( 'get-js-compression: MINIFIERS_DISABLE_COMPRESSION=1 in env', () => {
 	} );
 } );
 
-describe( 'get-js-compression: MINIFIERS_DISABLE_COMPRESSION=0 in env', () => {
+describe( 'env-get-js-compression: MINIFIERS_DISABLE_COMPRESSION=0 in env', () => {
 	let server;
 	let request;
 
@@ -90,7 +90,7 @@ describe( 'get-js-compression: MINIFIERS_DISABLE_COMPRESSION=0 in env', () => {
 	} );
 } );
 
-describe( 'get-js-compression: Default Environment', () => {
+describe( 'env-get-js-compression: Default Environment', () => {
 	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
 
 	test( 'GET `/get` -- compression on in default env', async () => {
