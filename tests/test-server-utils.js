@@ -36,12 +36,17 @@ function startServer( env, port = null ) {
 				}
 			}
 		);
+		setTimeout( () => {
+			resolve( { server, port } );
+		}, 2000 );
+		/*
 		server.stdout.on( 'data', ( data ) => {
 			if ( data.includes( 'Server listening' ) ) {
 				console.log( '... Server resolved on port', port );
 				resolve( { server, port } );
 			}
 		} );
+		*/
 	} );
 }
 
