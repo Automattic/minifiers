@@ -53,7 +53,7 @@ readme](https://www.npmjs.com/package/generic-pool).
 
 ## Tests
 
-With the minifiers server already running, do `npm test`.
+Do `npm test`.
 
 ## Examples
 
