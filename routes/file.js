@@ -14,7 +14,7 @@ module.exports = async ( request, reply ) => {
 
 	// Check user's path falls in the base path.
 	const path = validatePath( userPath );
-	if ( path === false ) {
+	if ( ! path ) {
 		// Error should look the same as a stat failed, in order to
 		// not leak information
 		const err = new Error( `ENOENT: no such file or directory, open '${ userPath }'` );
