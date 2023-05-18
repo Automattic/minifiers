@@ -18,7 +18,6 @@ describe( 'get-js-no-compression: MINIFIERS_DISABLE_COMPRESSION=1 in env', () =>
 	} );
 
 	afterAll( () => {
-		console.log( 'afterAll, trying to shut the server down', server );
 		return stopServer( server );
 	} );
 
