@@ -49,7 +49,7 @@ readme](https://www.npmjs.com/package/generic-pool).
 
 * Set `MINIFIERS_BASE_PATH` to choose a path of files served through the
   /file endpoint. May be absolute or relative. If relative, relative to the
-  'lib' directory. Defaults to the repository root.
+  repository root directory. Defaults to the repository root.
 
 ## Tests
 
