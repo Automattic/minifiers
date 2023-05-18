@@ -52,7 +52,26 @@ function startServer( env, port = null ) {
 function stopServer( server ) {
 	return new Promise( ( resolve, reject ) => {
 		server.kill( 'SIGTERM' );
-		server.on( 'exit', resolve );
+		// After 5 seconds, send SIGKILL if the server is still running
+		const sigkillTimeout = setTimeout( () => {
+			if ( !server.killed ) {
+				console.log( 'Server still running after 5 seconds, sending SIGKILL' );
+				server.kill( 'SIGKILL' );
+			} else {
+				console.log( 'Server stopped' );
+			}
+		}, 5000 );
+		// Set a timeout to reject the promise if the server doesn't stop after 10 seconds
+		const rejectTimeout = setTimeout( () => {
+			console.log( 'Server shutdown timeout' );
+			reject( new Error( 'Server shutdown timeout' ) );
+		}, 10000 );
+		server.on( 'exit', () => {
+			console.log('!!!!!!!! server exit !!!!!!!!');
+			clearTimeout( sigkillTimeout );
+			clearTimeout( rejectTimeout );
+			resolve();
+		} );
 		server.on( 'error', reject );
 	} );
 }
