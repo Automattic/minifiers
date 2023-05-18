@@ -2,7 +2,7 @@ const { exec } = require( 'child_process' );
 
 /**
  * Generates a random port number between 3000 and 9000.
- * Since each test file spawns its own server, and they run in parallel,
+ * Since each test file can spawn its own server, and they run in parallel,
  * we need to make sure that each server is listening on a different port.
  *
  * @returns {int}
