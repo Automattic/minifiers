@@ -1,18 +1,22 @@
 const { exec } = require( 'child_process' );
 
+/**
+ * Generates a random port number between 3000 and 9000.
+ * Since each test file spawns its own server, and they run in parallel,
+ * we need to make sure that each server is listening on a different port.
+ *
+ * @returns {int}
+ */
 function generateRandomPort() {
 	return Math.floor( Math.random() * 6000 ) + 3000;
 }
 
 /**
- * Wraps a suite of tests with server setup and teardown. Starts the server before all tests,
- * and stops it after all tests have finished.
+ * Starts a server with the provided environment variables.
  *
- * @param {string} description - The description of the test suite.
  * @param {object} env - An object containing environment variables for the server.
- * @param {function} tests - A function containing all the tests for the suite. This function
- *                           takes a 'request' parameter, which is a supertest object configured
- *                           to send requests to the server.
+ * @returns {Promise} A Promise that resolves to an object containing the server instance
+ *                    and the port it is listening on.
  */
 function startServer( env ) {
 	return new Promise( ( resolve, reject ) => {
