@@ -133,7 +133,6 @@ module.exports = async ( request, reply ) => {
 			// the original version back.
 			do_compress = false;
 		}
-		do_compress = true;
 
 		if ( do_compress ) {
 			const compress_start = performance.now();
