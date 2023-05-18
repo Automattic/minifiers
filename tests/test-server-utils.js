@@ -26,6 +26,7 @@ function startServer( env, port = null ) {
 		if ( port === null ) {
 			port = generateRandomPort();
 		}
+		console.log("... Starting server on port", port);
 		const server = exec(
 			`npm start -- -p ${ port }`,
 			{ env: { ...process.env, ...env } },
@@ -37,6 +38,7 @@ function startServer( env, port = null ) {
 		);
 		server.stdout.on( 'data', ( data ) => {
 			if ( data.includes( 'Server listening' ) ) {
+				console.log("... Server resolved on port", port);
 				resolve( { server, port } );
 			}
 		} );
