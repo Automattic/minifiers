@@ -1,9 +1,19 @@
 'use strict';
 
+const { envBool } = require( './lib/util' );
+const maybeEnableMemoryDebugger = require( './lib/debug/memory-debugger' );
+maybeEnableMemoryDebugger();
+
 const server = require( 'fastify' )( {
-	logger: true,
+	logger: envBool( 'DEBUG_QUIET_REQUEST' ) ? false : true,
 	maxParamLength: 50000, // this defaults to 100, which is way too small
 } );
+if ( envBool( 'DEBUG_QUIET_REQUEST' ) ) {
+	console.debug( 'Quiet mode enabled.' );
+}
+if ( envBool( 'MINIFIERS_DISABLE_COMPRESSION' ) ) {
+	console.debug( 'Compression disabled.' );
+}
 
 // Routes
 server.get( '/', require( './routes/index' ) );

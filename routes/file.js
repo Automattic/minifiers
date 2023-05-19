@@ -1,14 +1,28 @@
-module.exports = ( request, reply ) => {
+module.exports = async ( request, reply ) => {
 	const fs = require( 'fs' );
 	const fs_path = require( 'path' );
 	const mime = require( 'mime-types' );
 	const minify = require( '../lib/minify' );
 	const compress = require( '../lib/compress' );
+	const validatePath = require( '../lib/validate-path' );
+	const { envBool } = require( '../lib/util' );
 	const { PerformanceObserver, performance } = require( 'perf_hooks' );
 
-	const path = request.query.path;
-
 	let log = {};
+
+	const userPath = request.query.path;
+
+	// Check user's path falls in the base path.
+	const path = validatePath( userPath );
+	if ( ! path ) {
+		// Error should look the same as a stat failed, in order to
+		// not leak information
+		const err = new Error( `ENOENT: no such file or directory, open '${ userPath }'` );
+		err.code = 'ENOENT';
+		send_error( reply, err, 404, 10501 );
+		return;
+	}
+
 	log.path = path;
 
 	let accept = request.headers[ 'accept-encoding' ];
@@ -45,7 +59,7 @@ module.exports = ( request, reply ) => {
 
 	if ( ! do_minify ) {
 		try {
-			send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
+			await send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
 		} catch ( err ) {
 			console.log( err );
 			send_error( reply, err, 404, 10404 );
@@ -75,14 +89,14 @@ module.exports = ( request, reply ) => {
 	// Go get the original
 	const origin_start = performance.now();
 	try {
-		send_reply( fs.readFileSync( read_from ).toString(), reply, accept, level );
+		await send_reply( fs.readFileSync( read_from ).toString(), reply, accept, level );
 	} catch ( err ) {
 		console.log( err );
 		send_error( reply, err, 404, 10404 );
 	}
 	log.origin_get_ms = parseInt( performance.now() - origin_start );
 
-	function send_reply( body, reply, accept, level ) {
+	async function send_reply( body, reply, accept, level ) {
 		let encoding = '';
 		let type = false;
 		let content_type = mime.lookup( path );
@@ -106,7 +120,7 @@ module.exports = ( request, reply ) => {
 		log.original_size = body.length;
 
 		const minify_start = performance.now();
-		[ body, type ] = minify( body, content_type );
+		[ body, type ] = await minify( body, content_type );
 		log.minify_ms = parseInt( performance.now() - minify_start );
 		log.type = type;
 		log.minify_size = body.length;
@@ -123,28 +137,38 @@ module.exports = ( request, reply ) => {
 			}
 		}
 
-		// If no type was matched then we are in a pass through condition,
-		// in which case we skip compression and go directly to providing
-		// the original version back.
-		if ( type !== false ) {
+		let do_compress = true;
+		if ( envBool( 'MINIFIERS_DISABLE_COMPRESSION' ) ) {
+			do_compress = false;
+		} else if ( type === false ) {
+			// If no type was matched then we are in a pass through condition,
+			// in which case we skip compression and go directly to providing
+			// the original version back.
+			do_compress = false;
+		}
+
+		if ( do_compress ) {
 			const compress_start = performance.now();
 			[ body, encoding ] = compress( body, accept, level );
-			log.compress_ms = parseInt( performance.now() - compress_start );
-			log.compress_size = body.length;
-			log.compress_size_diff = log.minify_size - log.compress_size;
-			log.compress_size_diff_percent = parseInt(
-				( log.compress_size_diff / log.minify_size ) * 100
-			);
+			if ( encoding !== null ) {
+				log.compress_ms = parseInt( performance.now() - compress_start );
+				log.compress_size = body.length;
+				log.compress_size_diff = log.minify_size - log.compress_size;
+				log.compress_size_diff_percent = parseInt(
+					( log.compress_size_diff / log.minify_size ) * 100
+				);
+			}
 		}
 
 		show_log( log );
-		reply
-			.code( 200 )
-			.header( 'Content-Type', content_type )
-			.header( 'Content-Encoding', encoding )
-			.header( 'x-minify-compression-level', level )
-			.header( 'x-minify', 't' )
-			.header( 'x-minify-cache', log.cache );
+		reply.code( 200 );
+		reply.header( 'Content-Type', content_type );
+		if ( encoding !== '' && encoding !== null ) {
+			reply.header( 'Content-Encoding', encoding );
+			reply.header( 'x-minify-compression-level', level );
+		}
+		reply.header( 'x-minify', 't' );
+		reply.header( 'x-minify-cache', log.cache );
 
 		if ( typeof etag === 'string' ) {
 			reply.header( 'Etag', etag );
@@ -168,6 +192,9 @@ module.exports = ( request, reply ) => {
 	}
 
 	function show_log( msg ) {
+		if ( process.env.DEBUG_QUIET_REQUEST ) {
+			return;
+		}
 		const time_stamp = new Date();
 		msg.when = time_stamp.toISOString();
 		console.log( JSON.stringify( msg ) );
