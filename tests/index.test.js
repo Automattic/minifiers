@@ -1,11 +1,16 @@
 'use strict';
 
+const { getSharedServerPort } = require( './test-server-utils' );
 const supertest = require( 'supertest' );
 
-test( 'GET `/` route', async () => {
-	const resp = await supertest( 'http://localhost:4747' )
-		.get( '/' )
-		.expect( 200 )
-		.expect( 'Content-Type', 'text/plain' )
-		.expect( 'Minifiers' );
+describe( 'index: Default environment', () => {
+	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
+
+	test( 'GET `/` route', async () => {
+		const resp = await request
+			.get( '/' )
+			.expect( 200 )
+			.expect( 'Content-Type', 'text/plain' )
+			.expect( 'Minifiers' );
+	} );
 } );

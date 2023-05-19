@@ -4,12 +4,25 @@ module.exports = async ( request, reply ) => {
 	const mime = require( 'mime-types' );
 	const minify = require( '../lib/minify' );
 	const compress = require( '../lib/compress' );
+	const validatePath = require( '../lib/validate-path' );
 	const { envBool } = require( '../lib/util' );
 	const { PerformanceObserver, performance } = require( 'perf_hooks' );
 
-	const path = request.query.path;
-
 	let log = {};
+
+	const userPath = request.query.path;
+
+	// Check user's path falls in the base path.
+	const path = validatePath( userPath );
+	if ( ! path ) {
+		// Error should look the same as a stat failed, in order to
+		// not leak information
+		const err = new Error( `ENOENT: no such file or directory, open '${ userPath }'` );
+		err.code = 'ENOENT';
+		send_error( reply, err, 404, 10501 );
+		return;
+	}
+
 	log.path = path;
 
 	let accept = request.headers[ 'accept-encoding' ];
