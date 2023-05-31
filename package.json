@@ -1,6 +1,6 @@
 {
 	"name": "minifiers",
-	"version": "8.1.1",
+	"version": "8.1.2",
 	"description": "HTTP minification proxy for HTML, CSS, JS, and SVG.",
 	"main": "server.js",
 	"engines": {
