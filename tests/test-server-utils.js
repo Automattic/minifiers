@@ -53,6 +53,10 @@ function stopServer( server ) {
 	console.log('stopServer', server.pid, server.spawnargs);
 	return new Promise( ( resolve, reject ) => {
 		server.kill( 'SIGTERM' );
+		setTimeout( () => {
+			server.kill( 'SIGKILL' );
+			resolve();
+		}, 1000 );
 		console.log('sent SIGTERM');
 		server.on( 'exit', resolve );
 		server.on( 'error', reject );
