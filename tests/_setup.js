@@ -9,6 +9,7 @@ module.exports = async () => {
 		},
 		getSharedServerPort()
 	);
+	console.log('server started', serverInstance.pid, serverInstance.spawnargs);
 	global.__TEST_SERVER__ = serverInstance;
 	global.__TEST_SERVER_PORT__ = port;
 };

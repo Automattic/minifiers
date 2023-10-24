@@ -31,10 +31,12 @@ function startServer( env, port = null ) {
 			{ env: { ...process.env, ...env } },
 			( error ) => {
 				if ( error ) {
+					console.log('server error', error);
 					reject( error );
 				}
 			}
 		);
+		console.log('server started 2', server.pid, server.spawnargs);
 		server.stdout.on( 'data', ( data ) => {
 			if ( data.includes( 'Server listening' ) ) {
 				resolve( { server, port } );
@@ -53,11 +55,12 @@ function stopServer( server ) {
 	console.log('stopServer', server.pid, server.spawnargs);
 	return new Promise( ( resolve, reject ) => {
 		server.kill( 'SIGTERM' );
+		console.log('sent SIGTERM', server.pid, server.spawnargs);
 		setTimeout( () => {
 			server.kill( 'SIGKILL' );
+			console.log('sent SIGKILL', server.pid, server.spawnargs);
 			resolve();
 		}, 1000 );
-		console.log('sent SIGTERM');
 		server.on( 'exit', resolve );
 		server.on( 'error', reject );
 	} );
