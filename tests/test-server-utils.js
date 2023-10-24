@@ -50,8 +50,10 @@ function startServer( env, port = null ) {
  * @returns {Promise} A Promise that resolves when the server is stopped.
  */
 function stopServer( server ) {
+	console.log('stopServer', server.pid, server.spawnargs);
 	return new Promise( ( resolve, reject ) => {
 		server.kill( 'SIGTERM' );
+		console.log('sent SIGTERM');
 		server.on( 'exit', resolve );
 		server.on( 'error', reject );
 	} );
