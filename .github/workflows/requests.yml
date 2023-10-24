@@ -12,8 +12,5 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Start Minifiers server
-      run: node server.js &
-
     - name: Run requests tests
       run: npm test
