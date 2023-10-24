@@ -29,6 +29,22 @@ const opt = require( 'node-getopt' )
 	.bindHelp()
 	.parseSystem();
 
+// Handle shutdown signals
+[ 'SIGINT', 'SIGTERM' ].forEach( ( signal ) => {
+	process.on( signal, () => {
+		console.log( `Received ${ signal }, shutting down...` );
+
+		server.close( ( err ) => {
+			if ( err ) {
+				console.error( 'Error during shutdown:', err );
+				process.exit( 1 );
+			}
+			console.log( 'Server closed' );
+			process.exit( 0 );
+		} );
+	} );
+} );
+
 // Run the server
 server.listen(
 	{
