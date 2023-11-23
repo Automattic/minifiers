@@ -1,4 +1,4 @@
-const { exec } = require( 'child_process' );
+const { spawn } = require( 'child_process' );
 
 /**
  * Generates a random port number between 3000 and 9000.
@@ -26,11 +26,13 @@ function startServer( env, port = null ) {
 		if ( port === null ) {
 			port = generateRandomPort();
 		}
-		const server = exec(
-			`npm start -- -p ${ port }`,
+		const server = spawn(
+			'node',
+			[ './server.js', `--port=${ port }` ],
 			{ env: { ...process.env, ...env } },
 			( error ) => {
 				if ( error ) {
+					console.error( 'Error starting server', error );
 					reject( error );
 				}
 			}
@@ -39,6 +41,10 @@ function startServer( env, port = null ) {
 			if ( data.includes( 'Server listening' ) ) {
 				resolve( { server, port } );
 			}
+		} );
+
+		server.stderr.on( 'data', ( data ) => {
+			console.info( `stderr: ${ data }` );
 		} );
 	} );
 }
