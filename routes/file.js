@@ -155,7 +155,7 @@ module.exports = async ( request, reply ) => {
 				log.compress_size = body.length;
 				log.compress_size_diff = log.minify_size - log.compress_size;
 				log.compress_size_diff_percent = parseInt(
-					( log.compress_size_diff / log.minify_size ) * 100
+					( log.compress_size_diff / log.minify_size ) * 100,
 				);
 			}
 		}

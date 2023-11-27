@@ -57,5 +57,5 @@ server.listen(
 			console.log( err );
 			process.exit( 1 );
 		}
-	}
+	},
 );
