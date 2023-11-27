@@ -12,7 +12,7 @@ module.exports = () => {
 		},
 		js: {
 			regex: new RegExp(
-				/^(application\/javascript)|(application\/x-javascript)|(application\/ecmascript)|(text\/javascript)|(text\/ecmascript)/
+				/^(application\/javascript)|(application\/x-javascript)|(application\/ecmascript)|(text\/javascript)|(text\/ecmascript)/,
 			),
 			min_func: require( './lib/processes/js-min-parent.js' ), // Forking version
 			// min_func: require( './lib/js-min.js' ), // Non-forking version

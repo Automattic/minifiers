@@ -86,7 +86,7 @@ describe( 'env-file: security tests', () => {
 	test( 'GET `/file` -- Double URL encoded traversal should return 404', async () => {
 		const resp = await request
 			.get(
-				`/file?path=%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252Fetc%252Fpasswd`
+				`/file?path=%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252Fetc%252Fpasswd`,
 			)
 			.expect( 404 );
 	} );
@@ -94,7 +94,7 @@ describe( 'env-file: security tests', () => {
 	test( 'GET `/file` -- UTF-8 encoded traversal should return 404', async () => {
 		const resp = await request
 			.get(
-				`/file?path=%C0%AE%C0%AE%2F%C0%AE%C0%AE%2F%C0%AE%C0%AE%2F%C0%AE%C0%AE%2F%C0%AE%C0%AE%2Fetc%2Fpasswd`
+				`/file?path=%C0%AE%C0%AE%2F%C0%AE%C0%AE%2F%C0%AE%C0%AE%2F%C0%AE%C0%AE%2F%C0%AE%C0%AE%2Fetc%2Fpasswd`,
 			)
 			.expect( 404 );
 	} );
