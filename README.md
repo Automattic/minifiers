@@ -79,7 +79,7 @@ export DEBUG_QUIET_REQUEST=1 # to disable request logging to console
 
 These 3 work well together when doing a load test.
 
-For fish shell users:
+For fish shell users2:
 
 ```fish
 set -x DEBUG_MEMORY 1
