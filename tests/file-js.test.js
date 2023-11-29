@@ -24,7 +24,9 @@ describe( 'file (js): Minify and execute minified code', () => {
 		const minifiedSize = minifiedText.length;
 		expect( minifiedSize ).toBeLessThan( originalSize * 0.65 );
 		console.info(
-			`Minimized ${target_url} to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed( 2 ) }% of original size`,
+			`Minimized ${ target_url } to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed(
+				2,
+			) }% of original size`,
 		);
 
 		// Run the minified code returned from the response
@@ -74,7 +76,9 @@ describe( 'file (js): Minify and execute minified code', () => {
 		const minifiedSize = minifiedText.length;
 		expect( minifiedSize ).toBeLessThan( originalSize * 0.65 );
 		console.info(
-			`Minimized ${target_url} to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed( 2 ) }% of original size`,
+			`Minimized ${ target_url } to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed(
+				2,
+			) }% of original size`,
 		);
 
 		// Run the minified code returned from the response
