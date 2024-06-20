@@ -110,4 +110,31 @@ describe( 'file (js): Minify and execute minified code', () => {
 		expect( sandbox._.random( 1, 5 ) ).toBeLessThanOrEqual( 5 );
 		expect( sandbox._.uniqueId( 'prefix-' ) ).toContain( 'prefix-' );
 	} );
+
+	test( 'GET `/file` -- JS minify and execute partner-listing-block-view.js', async () => {
+		const target_url = 'tests/files/partner-listing-block-view.js';
+		const originalContent = await fs.readFile( target_url, 'utf8' );
+
+		// Expect 200 - This file has an import statement, so we
+		// want to make sure we don't error.
+		const resp = await request
+			.get( `/file?path=${ target_url }` )
+			.expect( 200 )
+			.expect( 'Content-Type', /application\/javascript/ )
+			.expect( 'x-minify', 't' );
+		const { text: minifiedText } = resp;
+
+		// The source file was already minified, so make sure the new version
+		// is -10%/+10% the original size
+		const originalSize = originalContent.length;
+		const minifiedSize = minifiedText.length;
+		expect( minifiedSize ).toBeLessThan( originalSize * 1.10 );
+		expect( minifiedSize ).toBeGreaterThan( originalSize * 0.90 );
+		console.info(
+			`Minimized ${ target_url } to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed(
+				2,
+			) }% of original size`,
+		);
+	});
+
 } );
