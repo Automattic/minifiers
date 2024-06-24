@@ -9,10 +9,11 @@ describe( 'get-pass-through-test: Default environment', () => {
 	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
 
 	test( 'GET `/get` -- Pass Through', async () => {
+		const r1 = await request.get( `/get?url=${ target_url }` );
+		console.log({r1});
 		const resp = await request
 			.get( `/get?url=${ target_url }` )
 			.expect( 200 )
 			.expect( 'Content-Type', /image\/png/ );
-		console.log({resp});
 	} );
 } );
