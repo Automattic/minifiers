@@ -1,6 +1,6 @@
 {
 	"name": "minifiers",
-	"version": "8.2.0",
+	"version": "8.2.1",
 	"description": "HTTP minification proxy for HTML, CSS, JS, and SVG.",
 	"main": "server.js",
 	"engines": {
@@ -9,7 +9,7 @@
 	"dependencies": {
 		"@swc/core": "^1.6.3",
 		"csso": "^5.0.5",
-		"fastify": "^4.12.0",
+		"fastify": "^4.28.0",
 		"generic-pool": "^3.9.0",
 		"html-minifier": "^4.0.0",
 		"jsonminify": "^0.4.2",
