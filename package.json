@@ -15,13 +15,13 @@
 		"jsonminify": "^0.4.2",
 		"mime-types": "^2.1.35",
 		"node-getopt": "git://github.com/tuxpoldo/node-getopt.git#05e498731c14b648fa332ca78d3a301c5e4be440",
-		"superagent": "^8.1.2",
+		"superagent": "^9.0.2",
 		"svgo": "^3.0.2"
 	},
 	"devDependencies": {
 		"jest": "^29.7.0",
 		"prettier": "npm:wp-prettier@^3.0.3",
-		"supertest": "^6.3.3"
+		"supertest": "^7.0.0"
 	},
 	"scripts": {
 		"prettify": "prettier --write \"lib/**/*\" \"routes/**/*\" \"tests/**/*.test.js\" \"tests/**/files/example.js\" \"server.js\" \"config.js\" \"README.md\"",
