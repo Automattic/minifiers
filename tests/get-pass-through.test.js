@@ -13,5 +13,6 @@ describe( 'get-pass-through-test: Default environment', () => {
 			.get( `/get?url=${ target_url }` )
 			.expect( 200 )
 			.expect( 'Content-Type', /image\/png/ );
+		console.log({resp});
 	} );
 } );
