@@ -11,7 +11,7 @@
 		"csso": "^5.0.5",
 		"fastify": "^4.28.0",
 		"generic-pool": "^3.9.0",
-		"html-minifier": "^4.0.0",
+		"html-minifier-terser": "^7.2.0",
 		"jsonminify": "^0.4.2",
 		"mime-types": "^2.1.35",
 		"node-getopt": "git://github.com/tuxpoldo/node-getopt.git#05e498731c14b648fa332ca78d3a301c5e4be440",
