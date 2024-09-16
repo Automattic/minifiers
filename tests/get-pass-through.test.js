@@ -2,8 +2,7 @@
 
 const { getSharedServerPort } = require( './test-server-utils' );
 const supertest = require( 'supertest' );
-const target_url =
-	'https://wp-themes.com/wp-content/themes/twentytwentytwo/assets/images/flight-path-on-transparent-d.png';
+const target_url = 'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png';
 
 describe( 'get-pass-through-test: Default environment', () => {
 	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
