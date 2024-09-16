@@ -128,13 +128,12 @@ describe( 'file (js): Minify and execute minified code', () => {
 		// is -10%/+10% the original size
 		const originalSize = originalContent.length;
 		const minifiedSize = minifiedText.length;
-		expect( minifiedSize ).toBeLessThan( originalSize * 1.10 );
-		expect( minifiedSize ).toBeGreaterThan( originalSize * 0.90 );
+		expect( minifiedSize ).toBeLessThan( originalSize * 1.1 );
+		expect( minifiedSize ).toBeGreaterThan( originalSize * 0.9 );
 		console.info(
 			`Minimized ${ target_url } to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed(
 				2,
 			) }% of original size`,
 		);
-	});
-
+	} );
 } );
