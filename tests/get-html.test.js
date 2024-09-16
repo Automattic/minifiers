@@ -41,4 +41,28 @@ describe( 'get-html: Default environment', () => {
 			.expect( 'content-encoding', 'deflate' )
 			.expect( 'x-minify-compression-level', '8' );
 	} );
+
+	test( 'GET `/get` -- HTML & verify minification', async () => {
+		const resp = await request
+			.get( `/get?url=${ target_url }` )
+			.expect( 200 )
+			.expect( 'Content-Type', /text\/html/ )
+			.expect( 'x-minify', 't' );
+
+		const { text: minifiedText } = resp;
+
+		// Fetch the original content
+		const originalResp = await supertest( target_url ).get( '' );
+		const originalContent = originalResp.text;
+
+		// Verify it was actually minified
+		const originalSize = originalContent.length;
+		const minifiedSize = minifiedText.length;
+		expect( minifiedSize ).toBeLessThan( originalSize * 0.93 );
+		console.info(
+			`Minimized HTML to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed(
+				2,
+			) }% of original size`,
+		);
+	} );
 } );
