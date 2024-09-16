@@ -99,18 +99,22 @@ module.exports = ( request, reply ) => {
 	function send_error( reply, err ) {
 		if ( err instanceof Error ) {
 			log.error = err.message;
+			log.stack = err.stack;
 		} else {
 			log.error = err;
 		}
+		log.statusCode = err.status || 500;
+		log.responseBody = err.response ? err.response.text : 'No response body';
 		show_log( log );
 		reply
-			.code( 500 )
+			.code( log.statusCode )
 			.header( 'Content-Type', 'application/json' )
 			.header( 'x-minify-error-code', 10000 )
 			.send( {
 				status: 'error',
 				code: 10000,
 				msg: 'Error requesting the original resource',
+				details: log
 			} );
 	}
 
