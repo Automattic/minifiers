@@ -4,6 +4,8 @@
 
 HTTP minification server for CSS, HTML, JavaScript, JSON, and SVG.
 
+Test.
+
 ## Usage
 
 ```
