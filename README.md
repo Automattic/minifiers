@@ -55,6 +55,39 @@ readme](https://www.npmjs.com/package/generic-pool).
 
 Do `npm test`.
 
+## Manual Testing
+
+After starting the server with `npm start` or `node server.js`, you can test different functionalities using these example URLs:
+
+### CSS Minification and Compression
+```
+# Basic CSS minification
+http://localhost:4747/get?url=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.css
+
+# CSS with Gzip compression
+http://localhost:4747/get?with=gzip&level=9&url=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.css
+
+# CSS with Brotli compression
+http://localhost:4747/get?with=br&level=11&url=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.css
+```
+
+### JavaScript Minification
+```
+# Basic JS minification
+http://localhost:4747/get?url=https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js
+
+# JS with minification disabled
+http://localhost:4747/get?minify=false&url=https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js
+```
+
+### Other File Types
+```
+# HTML minification
+http://localhost:4747/get?url=https://raw.githubusercontent.com/h5bp/html5-boilerplate/refs/heads/main/dist/index.html
+
+# SVG minification
+http://localhost:4747/get?url=https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/javascript.svg
+```
 ## Examples
 
 The `tests/*.js` files are good reference for examples.
