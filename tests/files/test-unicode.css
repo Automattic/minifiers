@@ -1,0 +1,4 @@
+/* test3.css */
+.test:before {
+    content: "\f148";
+}
