@@ -11,11 +11,14 @@ describe( 'file (css): Minify CSS files', () => {
 		const target_url = 'tests/files/bootstrap.css';
 		const originalContent = await fs.readFile( target_url, 'utf8' );
 
+		const startTime = process.hrtime();
 		const resp = await request
 			.get( `/file?path=${ target_url }` )
 			.expect( 200 )
 			.expect( 'Content-Type', /text\/css/ )
 			.expect( 'x-minify', 't' );
+		const [ seconds, nanoseconds ] = process.hrtime( startTime );
+		const milliseconds = seconds * 1000 + nanoseconds / 1000000;
 
 		const minifiedText = resp.text;
 
@@ -26,7 +29,7 @@ describe( 'file (css): Minify CSS files', () => {
 		console.info(
 			`Minimized CSS ${ target_url } to ${ ( ( minifiedSize / originalSize ) * 100 ).toFixed(
 				2,
-			) }% of original size`,
+			) }% of original size in ${ milliseconds.toFixed( 2 ) }ms`,
 		);
 	} );
 
@@ -34,11 +37,14 @@ describe( 'file (css): Minify CSS files', () => {
 		const target_url = 'tests/files/test-unicode.css';
 		const originalContent = await fs.readFile( target_url, 'utf8' );
 
+		const startTime = process.hrtime();
 		const resp = await request
 			.get( `/file?path=${ target_url }` )
 			.expect( 200 )
 			.expect( 'Content-Type', /text\/css/ )
 			.expect( 'x-minify', 't' );
+		const [ seconds, nanoseconds ] = process.hrtime( startTime );
+		const milliseconds = seconds * 1000 + nanoseconds / 1000000;
 
 		const minifiedText = resp.text;
 
@@ -51,7 +57,7 @@ describe( 'file (css): Minify CSS files', () => {
 			`Minimized CSS ${ target_url } to ${ (
 				( minifiedText.length / originalContent.length ) *
 				100
-			).toFixed( 2 ) }% of original size`,
+			).toFixed( 2 ) }% of original size in ${ milliseconds.toFixed( 2 ) }ms`,
 		);
 	} );
 } );
