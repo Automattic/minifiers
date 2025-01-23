@@ -13,6 +13,7 @@
 		"generic-pool": "^3.9.0",
 		"html-minifier-terser": "^7.2.0",
 		"jsonminify": "^0.4.2",
+		"lightningcss": "^1.29.1",
 		"mime-types": "^2.1.35",
 		"node-getopt": "git://github.com/tuxpoldo/node-getopt.git#05e498731c14b648fa332ca78d3a301c5e4be440",
 		"superagent": "^10.1.1",
