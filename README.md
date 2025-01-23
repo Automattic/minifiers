@@ -60,6 +60,7 @@ Do `npm test`.
 After starting the server with `npm start` or `node server.js`, you can test different functionalities using these example URLs:
 
 ### CSS Minification and Compression
+
 ```
 # Basic CSS minification
 http://localhost:4747/get?url=https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.css
@@ -72,6 +73,7 @@ http://localhost:4747/get?with=br&level=11&url=https://cdn.jsdelivr.net/npm/boot
 ```
 
 ### JavaScript Minification
+
 ```
 # Basic JS minification
 http://localhost:4747/get?url=https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js
@@ -81,6 +83,7 @@ http://localhost:4747/get?minify=false&url=https://cdn.jsdelivr.net/npm/jquery@3
 ```
 
 ### Other File Types
+
 ```
 # HTML minification
 http://localhost:4747/get?url=https://raw.githubusercontent.com/h5bp/html5-boilerplate/refs/heads/main/dist/index.html
@@ -88,6 +91,7 @@ http://localhost:4747/get?url=https://raw.githubusercontent.com/h5bp/html5-boile
 # SVG minification
 http://localhost:4747/get?url=https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/javascript.svg
 ```
+
 ## Examples
 
 The `tests/*.js` files are good reference for examples.
