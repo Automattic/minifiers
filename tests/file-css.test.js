@@ -29,4 +29,4 @@ describe( 'file (css): Minify CSS files', () => {
 			) }% of original size`,
 		);
 	} );
-} ); 
+} );
