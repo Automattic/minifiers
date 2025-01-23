@@ -24,6 +24,10 @@ module.exports = ( request, reply ) => {
 	if ( typeof request.query.minify === 'string' && request.query.minify === 'false' ) {
 		do_minify = false;
 	}
+	// Skip minification for dashicons.css - workaround for unicode escapes being changed to utf8
+	if ( url.endsWith( 'dashicons.css' ) ) {
+		do_minify = false;
+	}
 	log.minify = do_minify;
 
 	// Go get the original
