@@ -30,6 +30,31 @@ describe( 'file (css): Minify CSS files', () => {
 		);
 	} );
 
+	test( 'GET `/file` -- CSS preserves Unicode escape sequences', async () => {
+		const target_url = 'tests/files/test-unicode.css';
+		const originalContent = await fs.readFile( target_url, 'utf8' );
+
+		const resp = await request
+			.get( `/file?path=${ target_url }` )
+			.expect( 200 )
+			.expect( 'Content-Type', /text\/css/ )
+			.expect( 'x-minify', 't' );
+
+		const minifiedText = resp.text;
+
+		// Verify Unicode escape sequence is preserved
+		expect( minifiedText ).toContain( '"\\f148"' );
+
+		// Also verify basic minification (whitespace removal etc)
+		expect( minifiedText.length ).toBeLessThan( originalContent.length );
+		console.info(
+			`Minimized CSS ${ target_url } to ${ (
+				( minifiedText.length / originalContent.length ) *
+				100
+			).toFixed( 2 ) }% of original size`,
+		);
+	} );
+
 	test( 'GET `/file` -- CSS minify supports nesting :where(& > .bar)', async () => {
 		// This is from https://github.com/evanw/esbuild/issues/4005
 		const target_url = 'tests/files/nesting-test.css';
