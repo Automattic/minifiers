@@ -40,7 +40,10 @@ module.exports = async ( request, reply ) => {
 		do_minify = false;
 	}
 
-	if ( path.match( /\.(dev|min)\./ ) ) {
+	if ( do_minify && path.match( /\.(dev|min)\./ ) ) {
+		do_minify = false;
+	}
+	if ( do_minify && path.endsWith( 'dashicons.css' ) ) {
 		do_minify = false;
 	}
 	log.minify = do_minify;
