@@ -63,9 +63,11 @@ module.exports = async ( request, reply ) => {
 	if ( ! do_minify ) {
 		try {
 			await send_reply( fs.readFileSync( path ).toString(), reply, accept, level );
+			return;
 		} catch ( err ) {
 			console.log( err );
 			send_error( reply, err, 404, 10404 );
+			return;
 		}
 	}
 
@@ -118,6 +120,7 @@ module.exports = async ( request, reply ) => {
 			}
 
 			reply.send( body );
+			return;
 		}
 
 		log.original_size = body.length;
