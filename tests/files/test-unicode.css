@@ -1,4 +1,4 @@
-/* test3.css */
+/* test-unicode.css */
 .test:before {
     content: "\f148";
 }
