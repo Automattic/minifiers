@@ -1,0 +1,4 @@
+/* test-unicode.css */
+.test:before {
+    content: "\f148";
+}
