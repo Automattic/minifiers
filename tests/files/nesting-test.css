@@ -1,0 +1,10 @@
+/* From https://github.com/evanw/esbuild/issues/4005 */
+.foo {
+  color: red;
+}
+
+.foo {
+  :where(& > .bar) {
+    color: purple;
+  }
+}
