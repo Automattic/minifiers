@@ -2,7 +2,7 @@
 
 const { getSharedServerPort } = require( './test-server-utils' );
 const supertest = require( 'supertest' );
-const target_url = 'https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/svg2009.svg';
+const target_url = 'https://s0.wp.com/wp-content/themes/h4/assets/hosting/globe-blue.svg';
 
 describe( 'get-svg: Default environment', () => {
 	let request = supertest( `http://localhost:${ getSharedServerPort() }` );
