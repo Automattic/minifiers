@@ -87,4 +87,17 @@ describe( 'file (css): Minify CSS files', () => {
 			) }% of original size`,
 		);
 	} );
+
+	test( 'GET `/file` -- Invalid CSS, skip minification', async () => {
+		const target_url = 'tests/files/bad-001.css';
+		const originalContent = await fs.readFile( target_url, 'utf8' );
+
+		const resp = await request
+			.get( `/file?path=${ target_url }` )
+			.expect( 200 )
+			.expect( 'Content-Type', /text\/css/ );
+
+		expect( resp.text ).toContain( 'Theme Name: Suidobashi' );
+		expect( resp.text.length ).toEqual( originalContent.length );
+	} );
 } );
