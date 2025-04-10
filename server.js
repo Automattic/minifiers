@@ -23,6 +23,8 @@ server.get( '/file', require( './routes/file' ) );
 server.get( '/get', require( './routes/get' ) );
 server.options( '/get', require( './routes/get' ) );
 
+server.get( '/raw-get/*', require( './routes/raw-get' ) );
+
 // Take care of command line options
 const opt = require( 'node-getopt' )
 	.create( [ [ 'p', 'port=4747', 'The TCP port that the web server will listen on.', 4747 ] ] )
