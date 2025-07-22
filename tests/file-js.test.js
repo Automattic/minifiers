@@ -15,7 +15,7 @@ describe( 'file (js): Minify and execute minified code', () => {
 		const resp = await request
 			.get( `/file?path=${ target_url }` )
 			.expect( 200 )
-			.expect( 'Content-Type', /application\/javascript/ )
+			.expect( 'Content-Type', /text\/javascript/ )
 			.expect( 'x-minify', 't' );
 		const { text: minifiedText } = resp;
 
@@ -67,7 +67,7 @@ describe( 'file (js): Minify and execute minified code', () => {
 		const resp = await request
 			.get( `/file?path=${ target_url }` )
 			.expect( 200 )
-			.expect( 'Content-Type', /application\/javascript/ )
+			.expect( 'Content-Type', /text\/javascript/ )
 			.expect( 'x-minify', 't' );
 		const { text: minifiedText } = resp;
 
@@ -120,7 +120,7 @@ describe( 'file (js): Minify and execute minified code', () => {
 		const resp = await request
 			.get( `/file?path=${ target_url }` )
 			.expect( 200 )
-			.expect( 'Content-Type', /application\/javascript/ )
+			.expect( 'Content-Type', /text\/javascript/ )
 			.expect( 'x-minify', 't' );
 		const { text: minifiedText } = resp;
 
