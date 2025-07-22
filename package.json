@@ -15,7 +15,7 @@
 		"generic-pool": "^3.9.0",
 		"html-minifier-terser": "^7.2.0",
 		"jsonminify": "^0.4.2",
-		"mime-types": "^2.1.35",
+		"mime-types": "^3.0.1",
 		"node-getopt": "git://github.com/tuxpoldo/node-getopt.git#05e498731c14b648fa332ca78d3a301c5e4be440",
 		"postcss": "^8.5.6",
 		"superagent": "^10.2.2",
