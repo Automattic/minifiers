@@ -102,6 +102,9 @@ module.exports = async ( request, reply ) => {
 		let encoding = '';
 		let type = false;
 		let content_type = mime.lookup( path );
+		if ( content_type === 'text/javascript' ) {
+			content_type = 'application/javascript';
+		}
 
 		if ( do_minify === false ) {
 			show_log( log );
