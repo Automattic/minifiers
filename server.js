@@ -6,7 +6,9 @@ maybeEnableMemoryDebugger();
 
 const server = require( 'fastify' )( {
 	logger: envBool( 'DEBUG_QUIET_REQUEST' ) ? false : true,
-	maxParamLength: 50000, // this defaults to 100, which is way too small
+	routerOptions: {
+		maxParamLength: 50000, // this defaults to 100, which is way too small
+	},
 } );
 if ( envBool( 'DEBUG_QUIET_REQUEST' ) ) {
 	console.debug( 'Quiet mode enabled.' );
