@@ -7,7 +7,7 @@
 		"node": ">=16.19.0"
 	},
 	"dependencies": {
-		"@swc/core": "^1.13.1",
+		"@swc/core": "^1.15.11",
 		"cssnano": "^7.1.0",
 		"cssnano-preset-lite": "^4.0.4",
 		"csso": "^5.0.5",
