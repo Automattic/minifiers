@@ -98,7 +98,7 @@ The `tests/*.js` files are good reference for examples.
 
 `http://localhost:4747/get?url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css`
 
-`http://localhost:4747/get?with=gzip&leve=9&url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css`
+`http://localhost:4747/get?with=gzip&level=9&url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css`
 
 `http://localhost:4747/get?with=br&level=11&url=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css`
 
